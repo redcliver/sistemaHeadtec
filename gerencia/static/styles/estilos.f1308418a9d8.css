@@ -1,0 +1,77 @@
+@charset "utf-8";
+.nav-radius-tel {
+    border-top-right-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+.nav-radius-main {
+    box-shadow: 0px 1px 20px rgba(0, 0, 0, 0.7), inset 0px 1px 60px rgba(42, 20, 236, 0.2);
+    border-top-left-radius: 14px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 16px;
+}
+
+.box-style {
+    box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.9), inset 0px 1px 60px rgba(42, 20, 236, 0.2);
+    background-color: rgb(246, 251, 255);
+    border-radius: 14px;
+}
+
+.box-color {
+    color: #333333;
+    /* text-shadow: 0px 1px 3px rgba(0,0,0,0.7); */
+}
+
+.box-color:hover {
+    color: #2e61fa;
+}
+
+.icones path {
+    color: blueviolet;
+}
+
+.main-container {
+    padding-top: 18vh;
+}
+
+.cabecalho {
+    width: 80px;
+    height: 80px;
+    float: left;
+}
+
+.cabecalho-text {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    font-size: 34px;
+    padding-left: 10px;
+}
+
+.cursos {
+    text-align: justify;
+    text-justify: inter-word;
+    padding-right: 35px;
+}
+
+.curso-head {
+    color: #0654d6;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.box-link {
+    font-size: 30px;
+}
+
+.requerido{
+    color: red;
+}
+
+.callan{
+    font-family: 'Chilanka', cursive;
+}
+
+
+/* #0663FF */
+
+/* #007bff */

@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inomont Engenharia">
+    <meta name="author" content="HeadTec Sistemas">
+    <title>{{title}} | Inomont Engenharia</title>
+    <link href="{% static '/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static '/css/pe-icons.css' %}" rel="stylesheet">
+    <link href="{% static '/css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static '/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static '/css/style.css' %}" rel="stylesheet">
+    <script src="{% static '/js/jquery.js' %}"></script>
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{% static '/images/ico/inomont.ico' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static '/images/ico/apple-touch-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static '/images/ico/apple-touch-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static '/images/ico/apple-touch-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" href="{% static '/images/ico/apple-touch-icon-57x57.png' %}">
+
+    <script type="text/javascript">
+    jQuery(document).ready(function($){
+	'use strict';
+      	jQuery('body').backstretch([
+	        "{% static '/images/bg/bgOil.jpg' %}",
+	        "{% static '/images/bg/bgOil.jpg' %}",
+	        "{% static '/images/bg/bgOil.jpg' %}"
+	    ], {duration: 5000, fade: 500});
+
+		$("#mapwrapper").gMap({ controls: false,
+         	scrollwheel: false,
+         	markers: [{
+              	latitude:40.7566,
+				longitude: -73.9863,
+          	icon: { image: "images/marker.png",
+              	iconsize: [44,44],
+          		iconanchor: [12,46],
+          		infowindowanchor: [12, 0] } }],
+          	icon: {
+              	image: "images/marker.png",
+             	iconsize: [26, 46],
+              	iconanchor: [12, 46],
+              	infowindowanchor: [12, 0] },
+         	latitude:40.7566,
+         	longitude: -73.9863,
+          	zoom: 14 });
+    });
+    </script>
+</head><!--/head-->
+<body>
+<div id="preloader"></div>
+    <header class="navbar navbar-inverse navbar-fixed-top opaqued" role="banner">
+    <div id="search-wrapper">
+        <div class="container">
+            <input id="search-box" placeholder="Search">
+        </div>
+    </div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <i class="fa fa-bars"></i>
+                </button>                
+                <a href="#main-slider" ><img src="{% static '/images/ico/inomont.png' %}" style="height: auto; width: 140px; padding: 3px !important; " alt="Inomont Engenharia." class="navbar-brand"/></a>
+
+            </div>
+            <div class="collapse navbar-collapse">                
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#main-slider">Principal</a></li>
+                    <li><a href="#empresa">Empresa</a></li>
+                    <li><a href="#sobrenos">Sobre nós</a></li>
+                    <li><a href="#parceiros">Parceiros</a></li>
+                    <li><a href="#trabalheConosco">Trabalhe conosco</a></li>
+                    <li><a href="/login">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </header><!--/header-->
+
+    <section id="main-slider" class="no-margin">
+        <div class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="carousel-content center centered">
+                                    <h2 class="boxed animation animated-item-1 fade-down">Inomont Engenharia</h2>
+                                    <p class="boxed animation animated-item-2 fade-up" style="font-weight: 500;"></p>
+                                    <br>
+                                    <a class="btn btn-md animation bounce-in" href="#empresa">Conheça a Inomont</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.item-->
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+    </section><!--/#main-slider-->
+
+    <div id="content-wrapper">
+        <section id="empresa" class="white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="center gap fade-down section-heading">
+                            <h2 class="main-title">Inomont Engenharia</h2>
+                            <hr>
+                            <p>A Inomont Engenharia se destaca pela sua objetividade na execução de seus desafios, pois, seus dirigentes acreditam que uma tarefa não pode ser executada duas vezes da mesma forma.
+                                A cada segundo, minuto e hora, deve-se ser aprendido algo novo.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="service-block">
+                            <div class="media-body fade-up">
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;A empresa “Inomont Engenharia” inscrita no CNPJ 31.067.908/0001-46 foi fundada em 31/07/2018 com intuito de fazer a diferença no setor industrial, mesmo sabendo da quantidade de empresas que surgiram nos últimos anos neste segmento. a Inomont acredita no seu potencial, pois, trata-se de uma sociedade sólida, onde seus diretores possuem experiência de mais de 10 anos em projetos de eletromecânica. Criada para prestar serviços de engenharia, gestão e controles para a Niplan Engenharia S.A “ empresa de grande porte no ramo de montagem eletromecânica em todo território nacional”. Foi visto que é possível atender mais clientes com o mesmo grau de segurança, qualidade e produtividade, não perdendo em nenhum momento a essência principal do nosso objetivo de "INOVAR A CADA INSTANTE".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.row-->
+                <div class="gap"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="service-block">
+                            <div class="media-body fade-up">
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;Nosso foco é ser diferente, fazer diferente. Ter uma estrutura enxuta e objetiva. Nestes 10 anos prestando serviços como CLT, mapeamos o tanto que podemos evoluir neste segmento. Até hoje ouvimos pessoas dizerem: - "Eu faço desta forma a mais de 20 anos, é assim que se faz", será mesmo? A Inomont não concorda com esta frase, podemos sim ser melhores a cada dia. Melhorar na forma de gerenciamento de materiais de aplicação, de desperdício, custos, metas, prazos, ferramentas, equipamentos e execução. Assim podemos montar com mais segurança, com mais qualidade e sermos muito mais produtivos.
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--/.row-->
+            </div>
+            <div class="gap"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="center gap fade-down section-heading">
+                            <h2 class="main-title">Atividades</h2>
+                            <hr>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+            <div class="row">
+
+               <div class="gap"></div>
+               <div class="row fade-up">
+                   <div class="col-md-6">
+                         <div class="testimonial-list-item">
+                           <blockquote>
+                               <p style="font-weight: 500;">Montagem de equipamentos industriais</p>
+                               <span>Filtros, Colunas de Flotação, Empilhadeiras, Retomadoras, Bombas.</span>
+                           </blockquote>
+                       </div>
+                       <div class="testimonial-list-item">
+                           <blockquote>
+                               <p style="font-weight: 500;">Montagem de estruturas metálicas</p>
+                           </blockquote>
+                       </div>
+                       <div class="testimonial-list-item">
+                           <blockquote>
+                               <p style="font-weight: 500;">Equipes de manutenção</p>
+                           </blockquote>
+                       </div>
+                   </div>
+                   <div class="col-md-6">
+                       <div class="testimonial-list-item">
+                           <blockquote>
+                               <p style="font-weight: 500;">Montagem de andaimes</p>
+                           </blockquote>
+                       </div>
+                       <div class="testimonial-list-item">
+                           <blockquote>
+                               <p style="font-weight: 500;">Montagem de infra-estrutura de elétrica e instrumentação</p>
+                           </blockquote>
+                       </div>
+                       <div class="testimonial-list-item">
+                           <blockquote>
+                               <p style="font-weight: 500;">Equipes de Pintura Industrial</p>
+                           </blockquote>
+                       </div>
+                   </div>
+               </div>
+	            <div class="gap"></div>
+        	</div>
+        </section>
+
+
+		<section id="single-quote" class="divider-section">
+	            <div class="container">
+	            	<div class="gap"></div>
+	                <div class="row">
+	                    <div class='col-md-offset-2 col-md-8 fade-up'>
+	                        <div class="carousel slide" data-ride="carousel" id="quote-carousel">
+	                            <div class="carousel-inner">
+	                                <div class="item active">
+	                                    <blockquote>
+	                                        <div class="row">
+	                                            <div class="col-sm-3 text-center">
+	                                                <img class="img-responsive" src="{% static '/images/walt-disney.png' %}" style="width: 100px;height:100px;">
+	                                            </div>
+	                                            <div class="col-sm-9">
+	                                                <p>Todos os seus sonhos podem se tornar realidade se você tiver coragem para persegui-los.</p>
+	                                                <small>Walt Disney</small>
+	                                            </div>
+	                                        </div>
+	                                    </blockquote>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="gap"></div>
+	      		</div>
+          </section>
+          
+          
+          <section id="sobrenos" class="white">
+            <div class="container">
+                <div class="center gap fade-down section-heading">
+                    <h2 class="main-title">Sobre nós</h2>
+                    <hr>
+                    <p>A Inomont Engenharia se destaca pela sua objetividade na execução de seus desafios, pois, seus dirigentes acreditam que uma tarefa não pode ser executada duas vezes da mesma forma.
+                        A cada segundo, minuto e hora, deve-se ser aprendido algo novo.</p>
+                </div>
+                <div class="gap"></div>
+                <div id="pricing-table" class="row">
+                    <div class="col-md-4 col-xs-12 flip-in">
+                        <ul class="plan plan1">
+                            <li class="plan-name">
+                                <h3>Visão</h3>
+                            </li>
+                            <li>
+                                Trazer ao mercado um novo conceito 
+                            </li>
+                            <li>
+                                em montagem com 
+                            </li>
+                            <li>    
+                                <strong>disciplina</strong>, <strong>foco</strong> e <strong>inovação</strong>.                            
+                            </li>
+                            <li>         
+                                &nbsp;                       
+                            </li>
+                            <li>     
+                                &nbsp;                              
+                            </li>
+                            <li>     
+                                &nbsp;                             
+                            </li>
+                        </ul>
+                    </div><!--/.col-md-3-->
+                    <div class="col-md-4 col-xs-12 flip-in">
+                        <ul class="plan plan2 featured">
+                            <li class="plan-name">
+                                <h3>Missão</h3>
+                            </li>
+                            <li>
+                                Evoluir junto com nossos clientes a cada montagem 
+                            </li>
+                            <li>
+                                executada, não sendo apenas mais uma no mercado, 
+                            </li>
+                            <li>
+                                agregando conceitos como Kaizen, Just In Time, 
+                            </li>
+                            <li>
+                                PDCA entre outros que aplicados da forma correta  
+                            </li>
+                            <li>
+                                se tornam ferramentas excepcionais
+                            </li>
+                            <li>
+                                para o desenvolvimento do negócio.
+                            </li>
+                        </ul>
+                    </div><!--/.col-md-3-->
+                    <div class="col-md-4 col-xs-12 flip-in">
+                        <ul class="plan plan3">
+                            <li class="plan-name">
+                                <h3>Valores</h3>
+                            </li>
+                            <li>
+                                · Segurança, qualidade e produtividade;
+                            </li>
+                            <li>
+                                · Respeito ao cliente interno e externo;
+                            </li>
+                            <li>                                
+                                · Ser um negócio sustentável;
+                            </li>
+                            <li>                                
+                                · Respeito ao meio ambiente;
+                            </li>
+                            <li>                                
+                                . Busca do conhecimento contínuo;                            
+                            </li>
+                            <li>         
+                                &nbsp;                       
+                            </li>
+                        </ul>
+                    </div><!--/.col-md-3-->
+                </div>
+                <div class="gap"></div>
+            </div>
+        </section>
+
+        <section id="stats" class="divider-section">
+            <div class="gap"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xs-4">
+                        <div class="center bounce-in">
+                            <span class="stat-icon"><span class="pe-7s-user bounce-in"></span></span>
+                            <h1><span class="counter">{{colabRegistrados}}</span></h1>
+                            <h4>COLABORADORES INOMONT</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        <div class="center bounce-in">
+                            <span class="stat-icon"><span class="pe-7s-tools bounce-in"></span></span>
+                            <h1><span class="counter">{{colabTrabalhando}}</span></h1>
+                            <h4>COLABORADORES EM TRABALHO</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-xs-4">
+                        <div class="center bounce-in">
+                            <span class="stat-icon"><span class="pe-7s-graph1 bounce-in"></span></span>
+                            <h1><span class="counter">{{trabRealizado}}</span></h1>
+                            <h4>TRABALHOS REALIZADOS</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="gap"></div>
+        </section>
+        <div id="content-wrapper">
+                <section id="parceiros" class="white">
+                    <div class="container">
+                        <div class="gap"></div>
+                        <div class="center gap fade-down section-heading">
+                            <h2 class="main-title">Empreendimentos</h2>
+                            <hr>
+                            <p>Um pouco mais sobre algumas parcerias realizadas</p>
+                        </div>
+                        <div class="gap"></div>
+        
+                        <div id="meet-the-team" class="row">
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Cargill Agrícola <small class="role muted">Três Lagoas/MS e Goiânia/GO</small></h5>
+                                        <p>Período de Março/18 até o momento</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Nexa Resources <small class="role muted">Vazante/MG <br />&nbsp;</small></h5>
+                                        <p>Período de Setembro/18 até Abril/19</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Galvani <small class="role muted">Serra do Salitre/MG <br />&nbsp;</small></h5>
+                                        <p>Período de Agosto/16 a Dezembro/17</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Hidrovias do Brasil <small class="role muted">Itaituba/PA<br />&nbsp;</small></h5>
+                                        <p>Período de Julho/15 até Agosto/16</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Vale Fertilizantes <small class="role muted">Itabira/MG<br />&nbsp;</small></h5>
+                                        <p>Período de Maio/12 até Maio/13 e Abril/14 até Maio/15</p>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Vale Fertilizantes <small class="role muted">Vitória/ES<br />&nbsp;<br />&nbsp;<br />&nbsp;</small></h5>
+                                        <p>Período de Junho/13 até Abril/14</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Fosfertil <small class="role muted">Uberaba/MG<br />&nbsp;</small></h5>
+                                        <p>Período de Dezembro/10 até Dezembro/11</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Valorec Sumitomo Tubos do Brasil <small class="role muted">Jeceaba/MG</small></h5>
+                                        <p>Período de Julho/09 até Setembro/10</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Usina CSA<small class="role muted"> Janeiro/RJ <br />&nbsp;<br /><br />&nbsp;</small></h5>
+                                        <p>Período de Março/08 até Maio/09</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                                <div class="center team-member">
+                                    <div class="team-content fade-up">
+                                        <h5>Gerdau Aço Minas<small class="role muted">Ouro Branco/MG<br />&nbsp;</small></h5>
+                                        <p>Período de Setembro/06 até Janeiro/08</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-6">
+                            </div>
+                        </div><!--/#meet-the-team-->
+                        <div class="gap"></div>
+                        <div class="gap"></div>
+                    </div>
+                </section>
+            </div>
+
+			<div id="">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14920.749807916622!2d-51.698791!3d-20.783703!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xe5333441b4c72ddb!2sInomont%20Engenharia!5e0!3m2!1spt-BR!2sbr!4v1575551420241!5m2!1spt-BR!2sbr" width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen=""></iframe>	
+            </div>
+
+            <section id="trabalheConosco" class="white">
+                <div class="container">
+                	<div class="gap"></div>
+                    <div class="center gap fade-down section-heading">
+                        <h2 class="main-title">Trabalhe conosco</h2>
+                        <hr>
+                        <p>Venha fazer parte da nossa equipe</p>
+                    </div>
+                    <div class="gap"></div>
+                    <div class="row">
+                        <div class="col-md-4 fade-up">
+                            <h3>Contato</h3>
+                            <p><span class="icon icon-home"></span>Inomont Engenharia<br/>
+                                <span class="icon icon-phone"></span>Três Lagoas - MS<br/>
+                                <span class="icon icon-mobile"></span>+55 67 9 9142-8272<br/>
+                                <span class="icon icon-envelop"></span> <a href="#">davison.oliveira@inomont.com</a> <br/>
+                            </p>
+                        </div><!-- col -->
+
+                        <div class="col-md-8 fade-up">
+                            <h3>Faça um pré cadastro e/ou deixe o seu currículo.</h3>
+                            <br>
+                            <div id=""></div>
+                            <form method="post" action="sendemail.php" id="">
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5 col-5">
+                                    <label >Nome</label>
+                                    <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome">
+                                </div>
+                                <div class="col-sm-12 col-md-7 col-7">
+                                    <label >Sobrenome</label>
+                                    <input type="text" name="sobrenome" class="form-control" maxlength="400" placeholder="Sobrenome">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-6">
+                                    <label >CPF</label>
+                                    <input type="text" class="form-control" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-6">
+                                    <label >RG</label>
+                                    <input type="text" class="form-control" name="rg" maxlength="13" onkeydown="javascript: fMasc( this, mRG );">
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Data de Nasc.</label>
+                                    <input type="date" name="dataNasc" value="{{today}}" class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-8 col-8">
+                                    <label >E-mail</label>
+                                    <input type="email" name="email" maxlength="300" class="form-control">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-6">
+                                    <label >Celular</label>
+                                    <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );">
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-6">
+                                    <label >Telefone</label>
+                                    <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );">
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Estado civil</label>
+                                    <select name="estadoCivil" id="estate" class="custom-select form-control">
+                                        <option selected value="solteiro">Solteiro(a)</option>
+                                        <option value="casado">Casado(a)</option>
+                                        <option value="separado">Separado(a)</option>
+                                        <option value="divorciado">Divorciado(a)</option>
+                                        <option value="viuvo">Viúvo(a)</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Função pretendida </label>
+                                    <select name="funcao_id" id="estate" class="custom-select form-control">
+                                            <option selected disabled>Funções</option>
+                                        {% if funcaoModel in funcoes %}
+                                            <option selected value="{{funcaoModel.id}}">{{funcaoModel.nome}}</option>
+                                        {% endif %}
+                                        <option value="solteiro">Auxiliar de Serviços Gerais</option>
+                                        <option value="solteiro">Auxiliar de Escritório</option>
+                                        <option value="solteiro">Meio Oficial</option>
+                                        <option value="solteiro">Almoxarife</option>
+                                        <option value="solteiro">Encarregado de Dept Pessoal</option>
+                                        <option value="solteiro">Mestre de Obra</option>
+                                        <option value="solteiro">Menor Aprendiz</option>
+                                        <option value="solteiro">Acoplador</option>
+                                        <option value="solteiro">Ajudante</option>
+                                        <option value="solteiro">Auxiliar de Montagem e Manutenção</option>
+                                        <option value="solteiro">Caldeireiro</option>
+                                        <option value="solteiro">Eletricista de Força e Controle</option>
+                                        <option value="solteiro">Eletricista de Manutenção</option>
+                                        <option value="solteiro">Eletricista Montador</option>
+                                        <option value="solteiro">Encandor Industrial</option>
+                                        <option value="solteiro">Encarregado de Andaime</option>
+                                        <option value="solteiro">Encarregado de Caldeiraria</option>
+                                        <option value="solteiro">Encarregado de Elétrica</option>
+                                        <option value="solteiro">Encarregado de Isolamento</option>
+                                        <option value="solteiro">Encarregado de Mecânica</option>
+                                        <option value="solteiro">Encarregado de Montagem</option>
+                                        <option value="solteiro">Encarregado de Pintura</option>
+                                        <option value="solteiro">Encarregado de Solda</option>
+                                        <option value="solteiro">Encarregado de Tubulação</option>
+                                        <option value="solteiro">Grafiteiro</option>
+                                        <option value="solteiro">Hidrojatista</option>
+                                        <option value="solteiro">Instrimentista de Sistema</option>
+                                        <option value="solteiro">Instrimentista Montador</option>
+                                        <option value="solteiro">Isolador</option>
+                                        <option value="solteiro">Laminador</option>
+                                        <option value="solteiro">Maçariqueiro</option>
+                                        <option value="solteiro">Mecânico Ajustador</option>
+                                        <option value="solteiro">Mecânico de Manutenção</option>
+                                        <option value="solteiro">Mecânico de Refrigeração</option>
+                                        <option value="solteiro">Mecânico Montador</option>
+                                        <option value="solteiro">Mestre de Caldeiraria</option>
+                                        <option value="solteiro">Mestre de Eletricidade</option>
+                                        <option value="solteiro">Mestre de instrumentação</option>
+                                        <option value="solteiro">Mestre de Limpeza Industrial</option>
+                                        <option value="solteiro">Mestre de Montagem</option>
+                                        <option value="solteiro">Mestre de Solda</option>
+                                        <option value="solteiro">Mestre de Tubulação</option>
+                                        <option value="solteiro">Montador</option>
+                                        <option value="solteiro">Montador de Andaime</option>
+                                        <option value="solteiro">Montador de Andaime Líder</option>
+                                        <option value="solteiro">Montador de Estrutura</option>
+                                        <option value="solteiro">Montador Rigger</option>
+                                        <option value="solteiro">Plamista</option>
+                                        <option value="solteiro">Pedreiro</option>
+                                        <option value="solteiro">Pintor Industrial</option>
+                                        <option value="solteiro">Refratista</option>
+                                        <option value="solteiro">Rigger</option>
+                                        <option value="solteiro">Soldador de Dutos</option>
+                                        <option value="solteiro">Soldador de RX</option>
+                                        <option value="solteiro">Soldador ER</option>
+                                        <option value="solteiro">Soldador TIG</option>
+                                        <option value="solteiro">Soldador MIG</option>
+                                        <option value="solteiro">Soldador TIG/ER</option>
+                                        <option value="solteiro">Técnico de Segurança do Trabalho</option>
+                                        <option value="solteiro">Torneiro Mecânico</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Tempo de experiência </label>
+                                    <select name="funcao" id="estate" class="custom-select form-control">
+                                        <option  value="-1">Menos de 1 ano</option>
+                                        <option selected value="1">1 ano</option>
+                                        <option  value="2">2 ano</option>
+                                        <option  value="3">3 ano</option>
+                                        <option  value="4">Mais de 3 anos</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Escolaridade </label>
+                                    <select name="funcao" id="estate" class="custom-select form-control">
+                                        <option selected value="1">Ensino Fundamental Incompleto</option>
+                                        <option  value="2">Ensino Fundamental Completo</option>
+                                        <option  value="3">Ensino Médio Incompleto</option>
+                                        <option  value="4">Ensino Médio Completo</option>
+                                        <option  value="5">Superior Incompleto</option>
+                                        <option  value="6">Superior Completo</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Reside em Três Lagoas ?</label>
+                                    <select name="resideEmTresLagoas" id="estate" class="custom-select form-control">
+                                        <option selected value="1">Sim</option>
+                                        <option  value="2">Não</option>
+                                    </select>
+                                </div> 
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Já trabalhou na Inomont ?</label>
+                                    <select name="resideEmTresLagoas" id="estate" class="custom-select form-control">
+                                        <option  value="1">Sim</option>
+                                        <option selected value="2">Não</option>
+                                    </select>
+                                </div> 
+                                <div class="col-sm-12 col-md-12 col-12">
+                                    <label >Por quê a Inomont deve te contratar?</label>
+                                    <input type="text" class="form-control" name="pqInomont" maxlength="300">
+                                </div> 
+                                <hr>
+                                <h5>Experiência Profissional 1</h5>
+                                <div class="col-sm-4 col-md-4 col-4">
+                                    <label >Empresa</label>
+                                    <input type="text" class="form-control" name="empresa1" maxlength="300">
+                                </div> 
+                                <div class="col-sm-4 col-md-4 col-4">
+                                    <label >Função</label>
+                                    <input type="text" class="form-control" name="funcao1" maxlength="300">
+                                </div> 
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Periodo </label>
+                                    <select name="periodo1" id="estate" class="custom-select form-control">
+                                        <option selected value="1">De 1 a 6 meses</option>
+                                        <option  value="2">De 6 a 12 meses</option>
+                                        <option  value="3">De 1 ano a 1 ano e meio</option>
+                                        <option  value="4">De 1 ano e meio a 2 anos</option>
+                                        <option  value="5">Mais de 2 anos</option>
+                                    </select>
+                                    <br>
+                                </div>
+                                <h5>Experiência Profissional 2</h5>
+                                <div class="col-sm-4 col-md-4 col-4">
+                                    <label >Empresa</label>
+                                    <input type="text" class="form-control" name="empresa2" maxlength="300">
+                                </div> 
+                                <div class="col-sm-4 col-md-4 col-4">
+                                    <label >Função</label>
+                                    <input type="text" class="form-control" name="funcao2" maxlength="300">
+                                </div> 
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Periodo </label>
+                                    <select name="periodo2" id="estate" class="custom-select form-control">
+                                        <option selected value="1">De 1 a 6 meses</option>
+                                        <option  value="2">De 6 a 12 meses</option>
+                                        <option  value="3">De 1 ano a 1 ano e meio</option>
+                                        <option  value="4">De 1 ano e meio a 2 anos</option>
+                                        <option  value="5">Mais de 2 anos</option>
+                                    </select>
+                                    <br>
+                                </div>
+                                <h5>Experiência Profissional 3</h5>
+                                <div class="col-sm-4 col-md-4 col-4">
+                                    <label >Empresa</label>
+                                    <input type="text" class="form-control" name="empresa3" maxlength="300">
+                                </div> 
+                                <div class="col-sm-4 col-md-4 col-4">
+                                    <label >Função</label>
+                                    <input type="text" class="form-control" name="funcao3" maxlength="300">
+                                </div> 
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <label >Periodo </label>
+                                    <select name="periodo3" id="estate" class="custom-select form-control">
+                                        <option selected value="1">De 1 a 6 meses</option>
+                                        <option  value="2">De 6 a 12 meses</option>
+                                        <option  value="3">De 1 ano a 1 ano e meio</option>
+                                        <option  value="4">De 1 ano e meio a 2 anos</option>
+                                        <option  value="5">Mais de 2 anos</option>
+                                    </select>
+                                    <br>
+                                </div>
+                                <br>
+                                <div class="col-sm-12 col-md-8 col-8">
+                                </div>
+                                <div class="col-sm-12 col-md-4 col-4">
+                                    <input class="btn btn-outlined btn-primary" style="float: right;" type="submit" value="Enviar" />
+                                </div>
+                            </div>
+                            </form>
+                        </div><!-- col -->
+                    </div><!-- row -->
+                    <div class="gap"></div>
+                </div>
+            </section>
+        </div>
+
+    <div id="footer-wrapper">
+        <section id="bottom" class="">
+            <div class="container">
+                <div class="row"><!--/.col-md-3-->
+
+                    <div class="col-md-3 col-sm-6">
+                            <h4>Links</h4>
+                            <div>
+                                <ul class="arrow">
+                                    <li><a href="#main-slider">Principal</a></li>
+                                    <li><a href="#empresa">Empresa</a></li>
+                                    <li><a href="#sobrenos">Sobre nós</a></li>
+                                    <li><a href="#parceiros">Parceiros</a></li>
+                                    <li><a href="#trabalheConosco">Trabalhe conosco</a></li>
+                                    <li><a href="/login">Login</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    <div class="col-md-3 col-sm-6">
+                    </div><!--/.col-md-3-->
+
+                    <div class="col-md-3 col-sm-6">
+                    </div> <!--/.col-md-3-->
+
+                    <div class="col-md-3 col-sm-6 about-us-widget">
+                        <h4>Inomont Engenharia</h4>
+                        <p>Empresa focada na excelência em atender a necessidade do seu segmento com total segurança.</p>
+                    </div><!--/.col-md-3-->
+                </div>
+            </div>
+        </section><!--/#bottom-->
+
+        <footer id="footer" class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        &copy; HeadTec Desenvolvimento de Sistemas | <script>document.write(new Date().getFullYear());</script>
+                    </div>
+                    <div class="col-sm-4">
+                        <ul class="pull-right">
+                            <li><a id="gototop" class="gototop" href="#"><i class="fa fa-chevron-up"></i></a></li><!--#gototop-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer><!--/#footer-->
+    </div>
+
+
+    <script src="{% static '/js/plugins.js' %}"></script>
+    <script src="{% static '/js/bootstrap.min.js' %}"></script>
+    <script src="{% static '/js/jquery.prettyPhoto.js' %}"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
+    <script src="{% static '/js/init.js' %}"></script>
+    <script>
+            function goBack() {
+                window.history.back();
+            }
+        </script>
+        <script type="text/javascript">
+            function fMasc(objeto,mascara) {
+                obj=objeto
+                masc=mascara
+                setTimeout("fMascEx()",1)
+            }
+            function fMascEx() {
+                obj.value=masc(obj.value)
+            }
+            function mTel(tel) {
+                tel=tel.replace(/\D/g,"")
+                tel=tel.replace(/^(\d)/,"($1")
+                tel=tel.replace(/(.{3})(\d)/,"$1)$2")
+                if(tel.length == 9) {
+                    tel=tel.replace(/(.{1})$/,"-$1")
+                } else if (tel.length == 10) {
+                    tel=tel.replace(/(.{2})$/,"-$1")
+                } else if (tel.length == 11) {
+                    tel=tel.replace(/(.{3})$/,"-$1")
+                } else if (tel.length == 12) {
+                    tel=tel.replace(/(.{4})$/,"-$1")
+                } else if (tel.length > 12) {
+                    tel=tel.replace(/(.{4})$/,"-$1")
+                }
+                return tel;
+            }
+            function mCNPJ(cnpj){
+                cnpj=cnpj.replace(/\D/g,"")
+                cnpj=cnpj.replace(/^(\d{2})(\d)/,"$1.$2")
+                cnpj=cnpj.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
+                cnpj=cnpj.replace(/\.(\d{3})(\d)/,".$1/$2")
+                cnpj=cnpj.replace(/(\d{4})(\d)/,"$1-$2")
+                return cnpj
+            }
+            function mCPF(cpf){
+                cpf=cpf.replace(/\D/g,"")
+                cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+                cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
+                cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
+                return cpf
+            }
+            function mRG(rg){
+                rg=rg.replace(/\D/g,"");
+                rg=rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})$/,"$1.$2.$3-$4");
+                return rg;
+            }
+            function mCEP(cep){
+                cep=cep.replace(/\D/g,"")
+                cep=cep.replace(/(\d{5})(\d{3})/,"$1-$2")
+                return cep
+            }
+            function mNum(num){
+                num=num.replace(/\D/g,"")
+                return num
+            }
+            function limpa_formulário_cep() {
+                //Limpa valores do formulário de cep.
+                document.getElementById('rua').value=("");
+                document.getElementById('bairro').value=("");
+        }
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                var city = document.getElementById('city');
+                document.getElementById('rua').value=(conteudo.logradouro);
+                document.getElementById('bairro').value=(conteudo.bairro);
+                document.getElementById('cidade').value=(conteudo.localidade);
+                document.getElementById('uf').value=(conteudo.uf);
+                city.selectedIndex = "Três Lagoas";
+                document.getElementById('cep').onblur = function() {
+                    document.getElementById('estate').selectedIndex = 12;
+                }
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+            
+        function pesquisacep(valor) {
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+                //Valida o formato do CEP.
+                if(validacep.test(cep)) {
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('rua').value="...";
+                    document.getElementById('bairro').value="...";
+                    document.getElementById('cidade').value="...";
+                    document.getElementById('uf').value="...";
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+                    //Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        };
+        </script>
+</body>
+</html>

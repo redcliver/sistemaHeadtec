@@ -1,0 +1,45 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+<main>
+    <div class="row">
+        <div class="col menuPrincipal row" style="text-align: center;">
+            <div class="col item ">
+                <a href="/gerencia/clientes" class="gerenciaCaption">
+                <img class="icones" src="{% static '/ico/clientes.svg' %}"alt=""><br />
+                Clientes</a>
+            </div>
+            <div class="col item">
+                <a href="#" class="gerenciaCaption">
+                <img  class=" responsive gerenciaImg" src="{% static '/img/professor.png' %}"alt=""><br />
+                Orçamentos</a>
+            </div>
+            <div class="col item">
+                <a href="#" class="gerenciaCaption">
+                <img  class=" responsive gerenciaImg" src="{% static '/img/classe.png' %}"alt=""><br />
+                Clientes</a>
+            </div>
+            <div class="col item">
+                <a href="#" class="gerenciaCaption">
+                <img  class=" responsive gerenciaImg" src="{% static '/icones/icon_calendar.png' %}"alt=""><br />
+                Fornecedores</a>
+            </div>
+            <div class="col item">
+                <a href="#" class="gerenciaCaption">
+                <img  class=" responsive gerenciaImg" src="{% static '/icones/icon_calendar.png' %}"alt=""><br />
+                Relatórios</a>
+            </div>
+            <div class="col item">
+                <a href="#" class="gerenciaCaption">
+                <img  class=" responsive gerenciaImg" src="{% static '/img/suporte.png' %}"alt=""><br />
+                Suporte</a>
+            </div>
+            <div class="col item">
+                <a href="/logout" class="gerenciaCaption">
+                    <img class="icones" src="{% static '/ico/sair.svg' %}"><br />
+                Sair</a>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
