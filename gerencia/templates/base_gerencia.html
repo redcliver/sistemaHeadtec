@@ -52,6 +52,7 @@
             margin-left: 5px;
         }
         .icones {
+            margin-top: 2vh;
             height: 130px;
             width: 130px;
         }
@@ -85,9 +86,14 @@
             
         }
         .navbar {
-            background: #9da6a4;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to left, #9da6a4, #dbdbdb);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to left, #9da6a4, #dbdbdb); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: rgba(255,255,255,1);
+            background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
+            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(0,107,87,1)));
+            background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
+            background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
+            background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
+            background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#006b57', GradientType=1 );
             -webkit-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
             -moz-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
 			box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
