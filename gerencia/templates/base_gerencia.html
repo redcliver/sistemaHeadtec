@@ -3,7 +3,7 @@
 <head>
     <title>{{title}} | Headtec - Desenvolvimento de Sistemas</title>
     <meta charset="UTF-8">
-    <meta name="viewport" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load staticfiles %}
     <!--===============================================================================================-->
     <link rel="shortcut icon" href="{% static '/ico/favicon.ico' %}">
@@ -162,7 +162,7 @@
             background-size: cover;
         }
         .navbar-brand {
-            background: url('../../static/images/ico/inomont.png');
+            background: url('../../static/image/logoHeadtec.png');
             margin-left: 5px;
         }
         .sansserif {
@@ -185,6 +185,10 @@
         }
         .navbar-dark .navbar-nav .active > .nav-link {
             color: #888;
+        }
+        .navbar{
+            border-top-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
         }
         .jumbotron {
             margin-top: 60px;
@@ -258,6 +262,7 @@
                 cursor: pointer;
             }
         .footer {
+            font-size: 14px !important;
             position: fixed;
             left: 0;
             bottom: 0;
@@ -277,15 +282,15 @@
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark " >
         <a class="navbar-brand" href="/gerencia/"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             
         </div>
         <div class="" style="float: right; color: #edf8ff;" id="navbarSupportedContent">{{msgTelaInicial}}</div>
         <a style="float: right; color: #edf8ff;" href="/logout">&nbsp;&nbsp;&nbsp;SAIR</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </nav>
     <div class="jumbotron " style="color: #242424;">
         <div class="container">
@@ -294,7 +299,7 @@
         </div>
     </div>
     <footer class="footer">
-        <center style="font-size:20px; color: #d6d6d6;">HeadTec Desenvolvimento de Sistemas &#9474; <script>document.write(new Date().getFullYear());</script></center>
+        <center style="color: #d6d6d6;">HeadTec Desenvolvimento de Sistemas &#9474; <script>document.write(new Date().getFullYear());</script></center>
     </footer>
     <!--===============================================================================================-->
     <script src="{% static '/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
