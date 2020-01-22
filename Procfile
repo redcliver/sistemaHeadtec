@@ -1,0 +1,1 @@
+web: gunicorn sistemaht.wsgi --log-file -

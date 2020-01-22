@@ -3,7 +3,7 @@
 <head>
     <title>{{title}} | Headtec - Desenvolvimento de Sistemas</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
     {% load staticfiles %}
     <!--===============================================================================================-->
     <link rel="shortcut icon" href="{% static '/ico/favicon.ico' %}">
@@ -153,6 +153,13 @@
             color: #000000;
             text-align: center;
         }
+        .msgHT {
+            color: #67d8c0 !important;
+            text-shadow: 1px 1px 5px #000000;
+        }
+        #itemMenuResposivo{
+            display: none;
+        }
         @media (max-width: 768px) {
             body {
             background: url('../../static/img/fundo_diretor.jpg') no-repeat center center fixed;
@@ -178,13 +185,13 @@
            
         }
         .navbar-dark .navbar-nav .nav-link {
-            color: rgba(0,0,0,0.8);
+            color: rgb(238, 238, 238);
         }
         .navbar-dark .navbar-nav .nav-link:hover {
-            color: rgba(0,0,0,0.3);
+            color: rgb(248, 248, 248);
         }
         .navbar-dark .navbar-nav .active > .nav-link {
-            color: #888;
+            color: rgb(255, 255, 255);
         }
         .navbar{
             border-top-left-radius: 0 !important;
@@ -192,8 +199,8 @@
         }
         .jumbotron {
             margin-top: 60px;
-            margin-left: 50px;
-            margin-right: 50px;
+            margin-left: 20px;
+            margin-right: 20px;
             margin-bottom: 30px;
             background: -moz-linear-gradient(top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
             background: -webkit-linear-gradient(top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -276,26 +283,58 @@
             border-color: black;
             border-radius: 15px;
         }
+        .msgHT {
+            color: #67d8c0 !important;
+            text-shadow: 1px 1px 5px #000000;
+        }
+        #itemMenuResposivo{
+            display: block;
+        }
         }
     </style>
 </head>
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark " >
         <a class="navbar-brand" href="/gerencia/"></a>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            
-        </div>
-        <div class="" style="float: right; color: #edf8ff;" id="navbarSupportedContent">{{msgTelaInicial}}</div>
-        <a style="float: right; color: #edf8ff;" href="/logout">&nbsp;&nbsp;&nbsp;SAIR</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+          </button>
+  
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                  <span class="nav-link msgHT">{{msgTelaInicial}}</span>
+                </li>
+                <li id="itemMenuResposivo" class="nav-item">
+                  <a class="nav-link toggleHT" href="/gerencia/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li id="itemMenuResposivo" class="nav-item toggleHT">
+                    <a class="nav-link" href="/cliente/">Clientes</a>
+                </li>
+                <li id="itemMenuResposivo" class="nav-item toggleHT">
+                    <a class="nav-link" href="/cliente/">Orçamentos</a>
+                </li>
+                <li id="itemMenuResposivo" class="nav-item toggleHT">
+                    <a class="nav-link" href="/cliente/">Produtos</a>
+                </li>
+                <li id="itemMenuResposivo" class="nav-item toggleHT">
+                    <a class="nav-link" href="/cliente/">Relatórios</a>
+                </li>
+                <li id="itemMenuResposivo" class="nav-item toggleHT">
+                    <a class="nav-link" href="/cliente/">Suporte</a>
+                </li>
+                <li id="itemMenuResposivo" class="nav-item toggleHT">
+                    <a class="nav-link" href="/cliente/">Sair</a>
+                </li>
+            </ul>
+          </div>
     </nav>
     <div class="jumbotron " style="color: #242424;">
         <div class="container">
-           {% block body %}
-           {% endblock %} 
+            <div class="row">
+                {% block body %}
+                {% endblock %} 
+            </div>
         </div>
     </div>
     <footer class="footer">

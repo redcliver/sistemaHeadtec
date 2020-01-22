@@ -119,12 +119,12 @@ a:link {
 
 p a:active {
     position: relative;
-    color: #0c48ff;
+    color: #2f7a6e;
 }
 
 p a:hover {
     color: #FFFFFF;
-    background: #0c48ff;
+    background: #2f7a6e;
 }
 
 p a:hover::after {
@@ -132,13 +132,13 @@ p a:hover::after {
 }
 
 ::selection {
-    background: #a3b9ff;
-    color: #0c48ff;
+    background: #2f7a6e;
+    color: #ffffff;
 }
 
 p::selection {
-    background: #a3b9ff;
-    color: #0c48ff;
+    background: #2f7a6e;
+    color: #ffffff;
 }
 
 h1 {

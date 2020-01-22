@@ -80,10 +80,8 @@ celerybeat-schedule
 
 # Environments
 .env
-.env1
 .venv
 env/
-env1/
 venv/
 ENV/
 env2/
@@ -102,4 +100,4 @@ env2/
 .mypy_cache/
 
 # sqlite
-*.sqlite3
+#*.sqlite3
