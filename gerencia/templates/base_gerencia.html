@@ -56,6 +56,12 @@
             height: 130px;
             width: 130px;
         }
+        .iconesMenores{
+            margin-top: 2vh;
+            height: 80px;
+            width: 80px;
+
+        }
         .sansserif {
             color: #4588bd;
             font-family: 'Corben', cursive;
@@ -78,6 +84,7 @@
             color: #888;
         }
         .jumbotron {
+            color: #242424;
             top: 5%;
             background: -moz-linear-gradient(top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
             background: -webkit-linear-gradient(top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -161,6 +168,18 @@
         .gerencia{
             text-align: center;
         }
+        .btn-outline-success {
+            color: #004b3d;
+            background-color: transparent;
+            background-image: none;
+            border-color: #004b3d;
+        }
+        .btn-outline-success:active, .btn-outline-success:hover, .btn-outline-success:focus {
+            color: #ffffff;
+            background-color: #004b3d;
+            background-image: none;
+            border-color: #004b3d;
+        }
         #itemMenuResposivo{
             display: none;
         }
@@ -202,6 +221,7 @@
             border-top-right-radius: 0 !important;
         }
         .jumbotron {
+            color: #242424;
             margin-top: 60px;
             margin-left: 20px;
             margin-right: 20px;
@@ -317,32 +337,30 @@
                   <a class="nav-link toggleHT" href="/gerencia/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/cliente/">Clientes</a>
+                    <a class="nav-link" href="/clientesHome/">Clientes</a>
                 </li>
                 <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/cliente/">Orçamentos</a>
+                    <a class="nav-link" href="#">Orçamentos</a>
                 </li>
                 <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/cliente/">Produtos</a>
+                    <a class="nav-link" href="#">Produtos</a>
                 </li>
                 <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/cliente/">Relatórios</a>
+                    <a class="nav-link" href="#">Relatórios</a>
                 </li>
                 <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/cliente/">Suporte</a>
+                    <a class="nav-link" href="#">Suporte</a>
                 </li>
                 <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/cliente/">Sair</a>
+                    <a class="nav-link" href="/logout/">Sair</a>
                 </li>
             </ul>
           </div>
     </nav>
-    <div class="jumbotron " style="color: #242424;">
+    <div class="jumbotron">
         <div class="container">
-            <div class="row">
-                {% block body %}
-                {% endblock %} 
-            </div>
+            {% block body %}
+            {% endblock %} 
         </div>
     </div>
     <footer class="footer">

@@ -1,25 +1,21 @@
 {% extends 'base_gerencia.html' %}
 {% block body %}
 {% load static %}
-<main>
-    <div class="row">
-        <div class="col menuPrincipal row" style="text-align: center;">
-            <div class="col-md-2 item float-left">
-                <a href="/gerencia/colaboradoresNovo" class="gerenciaCaption">
-                <img class="icones " src="{% static '/ico/add-cliente.svg' %}"alt=""><br />
-                Novo Cliente</a>
-            </div>
-            <div class="col-md-2 item float-left">
-                <a href="/gerencia/aluno/editar" class="gerenciaCaption">
-                <img class="icones " src="{% static '/ico/visualizar.svg' %}"alt=""><br />
-                Visualizar Cliente</a>
-            </div>
-            <div class="col-md-8 item float-right">
-                <a href="#" onclick="goBack()" class="gerenciaCaption">
-                <img class="icones " src="{% static '/ico/voltar.svg' %}"alt=""><br />
-                Voltar</a>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/clientesNovo" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/add-cliente.svg' %}"alt=""><br />
+        Novo Cliente</a>
     </div>
-</main>
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/clientesBusca" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/visualizar.svg' %}"alt=""><br />
+        Visualizar Cliente</a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="#" onclick="goBack()" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/voltar.svg' %}"alt=""><br />
+        Voltar</a>
+    </div>
+</div>
 {% endblock %}

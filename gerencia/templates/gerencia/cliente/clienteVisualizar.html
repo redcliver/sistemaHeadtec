@@ -1,0 +1,53 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 float-left">
+        <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}"alt=""><br>
+        <span>visualizar Cliente</span>
+    </div>
+</div>
+<form action="/gerencia/clientesEditar/">
+    <div class="form-row">
+        <div class="col-sm-12 col-md-5">
+            <br>
+            <label >Nome</label>
+            <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome" value="{{clienteObj.nome}}">
+        </div>
+        <div class="col-sm-12 col-md-7">
+            <br>
+            <label >Sobrenome</label>
+            <input type="text" name="sobrenome" class="form-control" maxlength="400" placeholder="Sobrenome" value="{{clienteObj.sobrenome}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Telefone</label>
+            <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" value="{{clienteObj.telefone}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >CPF</label>
+            <input type="text" class="form-control" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );" value="{{clienteObj.cpf}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >RG</label>
+            <input type="text" class="form-control" name="rg" maxlength="13" onkeydown="javascript: fMasc( this, mRG );" value="{{clienteObj.rg}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Data de Nasc.</label>
+            <input type="date" name="dataNasc" value="{{today}}" class="form-control" value="{{clienteObj.dataNascimento}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Celular</label>
+            <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" value="{{clienteObj.telefone}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-9">
+            <label >E-mail</label>
+            <input type="email" name="email" maxlength="300" class="form-control" value="{{clienteObj.email}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>
+            <input class="btn btn-outline-success float-right"  type="submit" value="Editar" />
+        </div>
+    </div>
+</form>
+{% endblock %}
