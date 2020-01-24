@@ -1,370 +1,525 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+  <head>
     <title>{{title}} | Headtec - Desenvolvimento de Sistemas</title>
-    <meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#004b3d" />
     {% load staticfiles %}
     <!--===============================================================================================-->
-    <link rel="shortcut icon" href="{% static '/ico/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static '/ico/favicon.ico' %}" />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}"
+    />
     <!--===============================================================================================-->
-    <link href="https://fonts.googleapis.com/css?family=Corben" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Corben"
+      rel="stylesheet"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/fonts/Linearicons-Free-v1.0.0/icon-font.min.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/vendor/animate/animate.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vendor/animate/animate.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vendor/css-hamburgers/hamburgers.min.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/vendor/animsition/css/animsition.min.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vendor/animsition/css/animsition.min.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/vendor/select2/select2.min.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vendor/select2/select2.min.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/vendor/daterangepicker/daterangepicker.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/styles/main_styles.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/styles/responsive.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/styles/estilos.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static '/styles/eventoStyle.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/vendor/daterangepicker/daterangepicker.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/styles/main_styles.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/styles/responsive.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/styles/estilos.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/styles/eventoStyle.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/css/util.css'% }">
-    <link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/util.css'% }"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/main.css' %}"
+    />
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static '/css/normalize.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static '/css/demo.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static '/css/component.css' %}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/normalize.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/demo.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static '/css/component.css' %}"
+    />
     <!--===============================================================================================-->
     <style>
+      body {
+        background: url("../../static/image/gerenciaFundo.jpg") no-repeat center
+          center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+      .navbar-brand {
+        background: url("../../static/image/logoHeadtec.png");
+        width: 178px;
+        height: 75px;
+        margin-left: 5px;
+      }
+      .icones {
+        margin-top: 2vh;
+        height: 130px;
+        width: 130px;
+      }
+      .iconesMenores {
+        margin-top: 2vh;
+        height: 80px;
+        width: 80px;
+      }
+      .sansserif {
+        color: #4588bd;
+        font-family: "Corben", cursive;
+        font-size: 20px;
+      }
+      .sansserif1 {
+        color: rgb(0, 0, 0);
+        font-family: "Corben", cursive;
+        font-size: 14px;
+      }
+      .navbar-dark .navbar-nav .nav-link {
+        color: rgba(0, 0, 0, 0.8);
+      }
+      .navbar-dark .navbar-nav .nav-link:hover {
+        color: rgba(0, 0, 0, 0.3);
+      }
+      .navbar-dark .navbar-nav .active > .nav-link {
+        color: #888;
+      }
+      .jumbotron {
+        color: #242424;
+        top: 5%;
+        background: -moz-linear-gradient(
+          top,
+          rgba(255, 255, 255, 0.7) 0%,
+          rgba(255, 255, 255, 1) 100%
+        ); /* FF3.6-15 */
+        background: -webkit-linear-gradient(
+          top,
+          rgba(255, 255, 255, 0.7) 0%,
+          rgba(255, 255, 255, 1) 100%
+        ); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.7) 0%,
+          rgba(255, 255, 255, 1) 100%
+        ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+      }
+      .navbar {
+        background: rgba(255, 255, 255, 1);
+        background: -moz-linear-gradient(
+          left,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(0, 107, 87, 1) 100%
+        );
+        background: -webkit-gradient(
+          left top,
+          right top,
+          color-stop(0%, rgba(255, 255, 255, 1)),
+          color-stop(100%, rgba(0, 107, 87, 1))
+        );
+        background: -webkit-linear-gradient(
+          left,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(0, 107, 87, 1) 100%
+        );
+        background: -o-linear-gradient(
+          left,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(0, 107, 87, 1) 100%
+        );
+        background: -ms-linear-gradient(
+          left,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(0, 107, 87, 1) 100%
+        );
+        background: linear-gradient(
+          to right,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(0, 107, 87, 1) 100%
+        );
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#006b57', GradientType=1 );
+        -webkit-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
+        -moz-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
+        box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
+        border-bottom: 3px solid #004b3d;
+      }
+      .parceiros {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 36px;
+        color: #343a40;
+      }
+      .clientes {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 18px;
+        color: #343a40;
+        margin-left: 30px;
+      }
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+      /* Modal Content */
+      .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+      }
+      /* The Close Button */
+      .close {
+        color: #1c1c1c;
+        float: right;
+        line-height: 2;
+      }
+      .close:hover,
+      .close:focus {
+        background-color: #aaaaaa;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding-top: 5px;
+        color: #000000;
+        text-align: center;
+      }
+      .msgHT {
+        color: #67d8c0 !important;
+        text-shadow: 1px 1px 5px #000000;
+      }
+      .gerencia {
+        text-align: center;
+      }
+      .btn-outline-success {
+        color: #004b3d;
+        background-color: transparent;
+        background-image: none;
+        border-color: #004b3d;
+      }
+      .btn-outline-success:active,
+      .btn-outline-success:hover,
+      .btn-outline-success:focus {
+        color: #ffffff;
+        background-color: #004b3d;
+        background-image: none;
+        border-color: #004b3d;
+      }
+      #itemMenuResposivo {
+        display: none;
+      }
+      @media (max-width: 768px) {
         body {
-            background: url('../../static/image/gerenciaFundo.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
+          background: url("../../static/img/fundo_diretor.jpg") no-repeat center
+            center fixed;
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
         }
         .navbar-brand {
-            background: url('../../static/image/logoHeadtec.png');
-            width: 178px;
-            height: 75px;
-            margin-left: 5px;
-        }
-        .icones {
-            margin-top: 2vh;
-            height: 130px;
-            width: 130px;
-        }
-        .iconesMenores{
-            margin-top: 2vh;
-            height: 80px;
-            width: 80px;
-
+          background: url("../../static/image/logoHeadtec.png");
+          margin-left: 5px;
         }
         .sansserif {
-            color: #4588bd;
-            font-family: 'Corben', cursive;
-            font-size: 20px;
-           
+          color: #4588bd;
+          font-family: "Corben", cursive;
+          font-size: 20px;
         }
         .sansserif1 {
-            color: rgb(0,0,0);
-            font-family: 'Corben', cursive;
-            font-size: 14px;
-           
+          color: rgb(0, 0, 0);
+          font-family: "Corben", cursive;
+          font-size: 14px;
         }
         .navbar-dark .navbar-nav .nav-link {
-            color: rgba(0,0,0,0.8);
+          color: rgb(238, 238, 238);
         }
         .navbar-dark .navbar-nav .nav-link:hover {
-            color: rgba(0,0,0,0.3);
+          color: rgb(248, 248, 248);
         }
         .navbar-dark .navbar-nav .active > .nav-link {
-            color: #888;
-        }
-        .jumbotron {
-            color: #242424;
-            top: 5%;
-            background: -moz-linear-gradient(top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-            
+          color: rgb(255, 255, 255);
         }
         .navbar {
-            background: rgba(255,255,255,1);
-            background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
-            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(0,107,87,1)));
-            background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
-            background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
-            background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
-            background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(0,107,87,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#006b57', GradientType=1 );
-            -webkit-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
-            -moz-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
-			box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
-            border-bottom: 3px solid #004b3d;
+          border-top-left-radius: 0 !important;
+          border-top-right-radius: 0 !important;
+        }
+        .jumbotron {
+          color: #242424;
+          margin-top: 60px;
+          margin-left: 20px;
+          margin-right: 20px;
+          margin-bottom: 30px;
+          background: -moz-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 1) 100%
+          ); /* FF3.6-15 */
+          background: -webkit-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 1) 100%
+          ); /* Chrome10-25,Safari5.1-6 */
+          background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 1) 100%
+          ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+        }
+        .navbar {
+          background: rgba(128, 129, 130, 1);
+          background: -moz-linear-gradient(
+            left,
+            rgba(128, 129, 130, 1) 0%,
+            rgba(81, 85, 87, 1) 100%
+          );
+          background: -webkit-gradient(
+            left top,
+            right top,
+            color-stop(0%, rgba(128, 129, 130, 1)),
+            color-stop(100%, rgba(81, 85, 87, 1))
+          );
+          background: -webkit-linear-gradient(
+            left,
+            rgba(128, 129, 130, 1) 0%,
+            rgba(81, 85, 87, 1) 100%
+          );
+          background: -o-linear-gradient(
+            left,
+            rgba(128, 129, 130, 1) 0%,
+            rgba(81, 85, 87, 1) 100%
+          );
+          background: -ms-linear-gradient(
+            left,
+            rgba(128, 129, 130, 1) 0%,
+            rgba(81, 85, 87, 1) 100%
+          );
+          background: linear-gradient(
+            to right,
+            rgba(128, 129, 130, 1) 0%,
+            rgba(81, 85, 87, 1) 100%
+          );
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#808182', endColorstr='#515557', GradientType=1 );
+          -webkit-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
+          -moz-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
+          box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
+          border-radius: 15px;
         }
         .parceiros {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 36px;
-            color: #343a40;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 36px;
+          color: #343a40;
         }
         .clientes {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 18px;
-            color: #343a40;
-            margin-left: 30px;
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 18px;
+          color: #343a40;
+          margin-left: 30px;
         }
         /* The Modal (background) */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+          display: none; /* Hidden by default */
+          position: fixed; /* Stay in place */
+          z-index: 1; /* Sit on top */
+          padding-top: 100px; /* Location of the box */
+          left: 0;
+          top: 0;
+          width: 100%; /* Full width */
+          height: 100%; /* Full height */
+          overflow: auto; /* Enable scroll if needed */
+          background-color: rgb(0, 0, 0); /* Fallback color */
+          background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
         }
         /* Modal Content */
         .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%;
+          background-color: #fefefe;
+          margin: auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 30%;
         }
         /* The Close Button */
         .close {
-            color: #1c1c1c;
-            float: right;
-            line-height: 2;
-            
+          color: #1c1c1c;
+          float: right;
+          line-height: 2;
         }
-            .close:hover,
-            .close:focus {
-                background-color: #aaaaaa;
-                text-decoration: none;
-                cursor: pointer;
-            }
+        .close:hover,
+        .close:focus {
+          background-color: #aaaaaa;
+          text-decoration: none;
+          cursor: pointer;
+        }
         .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            padding-top: 5px;
-            color: #000000;
-            text-align: center;
+          font-size: 14px !important;
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          padding-top: 5px;
+          color: #747474;
+          text-align: center;
+        }
+        .eventoBorda {
+          border-width: 1px;
+          border-style: solid;
+          border-color: black;
+          border-radius: 15px;
         }
         .msgHT {
-            color: #67d8c0 !important;
-            text-shadow: 1px 1px 5px #000000;
+          color: #67d8c0 !important;
+          text-shadow: 1px 1px 5px #000000;
         }
-        .gerencia{
-            text-align: center;
+        .gerencia {
+          text-align: center;
         }
-        .btn-outline-success {
-            color: #004b3d;
-            background-color: transparent;
-            background-image: none;
-            border-color: #004b3d;
+        #itemMenuResposivo {
+          display: block;
         }
-        .btn-outline-success:active, .btn-outline-success:hover, .btn-outline-success:focus {
-            color: #ffffff;
-            background-color: #004b3d;
-            background-image: none;
-            border-color: #004b3d;
-        }
-        #itemMenuResposivo{
-            display: none;
-        }
-        @media (max-width: 768px) {
-            body {
-            background: url('../../static/img/fundo_diretor.jpg') no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-        }
-        .navbar-brand {
-            background: url('../../static/image/logoHeadtec.png');
-            margin-left: 5px;
-        }
-        .sansserif {
-            color: #4588bd;
-            font-family: 'Corben', cursive;
-            font-size: 20px;
-           
-        }
-        .sansserif1 {
-            color: rgb(0,0,0);
-            font-family: 'Corben', cursive;
-            font-size: 14px;
-           
-        }
-        .navbar-dark .navbar-nav .nav-link {
-            color: rgb(238, 238, 238);
-        }
-        .navbar-dark .navbar-nav .nav-link:hover {
-            color: rgb(248, 248, 248);
-        }
-        .navbar-dark .navbar-nav .active > .nav-link {
-            color: rgb(255, 255, 255);
-        }
-        .navbar{
-            border-top-left-radius: 0 !important;
-            border-top-right-radius: 0 !important;
-        }
-        .jumbotron {
-            color: #242424;
-            margin-top: 60px;
-            margin-left: 20px;
-            margin-right: 20px;
-            margin-bottom: 30px;
-            background: -moz-linear-gradient(top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
-            background: -webkit-linear-gradient(top, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
-            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-            
-        }
-        .navbar {
-            background: rgba(128,129,130,1);
-            background: -moz-linear-gradient(left, rgba(128,129,130,1) 0%, rgba(81,85,87,1) 100%);
-            background: -webkit-gradient(left top, right top, color-stop(0%, rgba(128,129,130,1)), color-stop(100%, rgba(81,85,87,1)));
-            background: -webkit-linear-gradient(left, rgba(128,129,130,1) 0%, rgba(81,85,87,1) 100%);
-            background: -o-linear-gradient(left, rgba(128,129,130,1) 0%, rgba(81,85,87,1) 100%);
-            background: -ms-linear-gradient(left, rgba(128,129,130,1) 0%, rgba(81,85,87,1) 100%);
-            background: linear-gradient(to right, rgba(128,129,130,1) 0%, rgba(81,85,87,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#808182', endColorstr='#515557', GradientType=1 );
-            -webkit-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
-            -moz-box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
-			box-shadow: 0 6px 6px -6px rgba(0, 0, 0, 0.8);
-			border-radius: 15px;
-        }
-        .parceiros {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 36px;
-            color: #343a40;
-        }
-        .clientes {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 18px;
-            color: #343a40;
-            margin-left: 30px;
-        }
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-        /* Modal Content */
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 30%;
-        }
-        /* The Close Button */
-        .close {
-            color: #1c1c1c;
-            float: right;
-            line-height: 2;
-            
-        }
-            .close:hover,
-            .close:focus {
-                background-color: #aaaaaa;
-                text-decoration: none;
-                cursor: pointer;
-            }
-        .footer {
-            font-size: 14px !important;
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;    
-            padding-top: 5px;
-            color: #747474;
-            text-align: center;
-        }
-        .eventoBorda{
-            border-width: 1px;
-            border-style: solid;
-            border-color: black;
-            border-radius: 15px;
-        }
-        .msgHT {
-            color: #67d8c0 !important;
-            text-shadow: 1px 1px 5px #000000;
-        }
-        .gerencia{
-            text-align: center;
-        }
-        #itemMenuResposivo{
-            display: block;
-        }
-        }
+      }
     </style>
-</head>
-<body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark " >
-        <a class="navbar-brand" href="/gerencia/"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-  
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                  <span class="nav-link msgHT">{{msgTelaInicial}}</span>
-                </li>
-                <li id="itemMenuResposivo" class="nav-item">
-                  <a class="nav-link toggleHT" href="/gerencia/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/gerencia/clientesHome/">Clientes</a>
-                </li>
-                <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="#">Orçamentos</a>
-                </li>
-                <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="#">Produtos</a>
-                </li>
-                <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="#">Relatórios</a>
-                </li>
-                <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="#">Suporte</a>
-                </li>
-                <li id="itemMenuResposivo" class="nav-item toggleHT">
-                    <a class="nav-link" href="/logout/">Sair</a>
-                </li>
-            </ul>
-          </div>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark ">
+      <a class="navbar-brand" href="/gerencia/"></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <span class="nav-link msgHT">{{msgTelaInicial}}</span>
+          </li>
+          <li id="itemMenuResposivo" class="nav-item">
+            <a class="nav-link toggleHT" href="/gerencia/"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li id="itemMenuResposivo" class="nav-item toggleHT">
+            <a class="nav-link" href="/gerencia/clientesHome/">Clientes</a>
+          </li>
+          <li id="itemMenuResposivo" class="nav-item toggleHT">
+            <a class="nav-link" href="#">Orçamentos</a>
+          </li>
+          <li id="itemMenuResposivo" class="nav-item toggleHT">
+            <a class="nav-link" href="#">Produtos</a>
+          </li>
+          <li id="itemMenuResposivo" class="nav-item toggleHT">
+            <a class="nav-link" href="#">Relatórios</a>
+          </li>
+          <li id="itemMenuResposivo" class="nav-item toggleHT">
+            <a class="nav-link" href="#">Suporte</a>
+          </li>
+          <li id="itemMenuResposivo" class="nav-item toggleHT">
+            <a class="nav-link" href="/logout/">Sair</a>
+          </li>
+        </ul>
+      </div>
     </nav>
     <div class="jumbotron">
-        <div class="container">
-            {% block body %}
-            {% endblock %} 
-        </div>
+      <div class="container">
+        {% block body %} {% endblock %}
+      </div>
     </div>
     <footer class="footer">
-        <center style="color: #d6d6d6;">HeadTec Desenvolvimento de Sistemas &#9474; <script>document.write(new Date().getFullYear());</script></center>
+      <center style="color: #d6d6d6;">
+        HeadTec Desenvolvimento de Sistemas &#9474;
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+      </center>
     </footer>
     <!--===============================================================================================-->
     <script src="{% static '/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
@@ -383,123 +538,125 @@
     <!--===============================================================================================-->
     <script src="{% static '/js/main.js' %}"></script>
     <script>
-        function goBack() {
-            window.history.back();
-        }
+      function goBack() {
+        window.history.back();
+      }
     </script>
     <script type="text/javascript">
-        function fMasc(objeto,mascara) {
-            obj=objeto
-            masc=mascara
-            setTimeout("fMascEx()",1)
+      function fMasc(objeto, mascara) {
+        obj = objeto;
+        masc = mascara;
+        setTimeout("fMascEx()", 1);
+      }
+      function fMascEx() {
+        obj.value = masc(obj.value);
+      }
+      function mTel(tel) {
+        tel = tel.replace(/\D/g, "");
+        tel = tel.replace(/^(\d)/, "($1");
+        tel = tel.replace(/(.{3})(\d)/, "$1)$2");
+        if (tel.length == 9) {
+          tel = tel.replace(/(.{1})$/, "-$1");
+        } else if (tel.length == 10) {
+          tel = tel.replace(/(.{2})$/, "-$1");
+        } else if (tel.length == 11) {
+          tel = tel.replace(/(.{3})$/, "-$1");
+        } else if (tel.length == 12) {
+          tel = tel.replace(/(.{4})$/, "-$1");
+        } else if (tel.length > 12) {
+          tel = tel.replace(/(.{4})$/, "-$1");
         }
-        function fMascEx() {
-            obj.value=masc(obj.value)
-        }
-        function mTel(tel) {
-            tel=tel.replace(/\D/g,"")
-            tel=tel.replace(/^(\d)/,"($1")
-            tel=tel.replace(/(.{3})(\d)/,"$1)$2")
-            if(tel.length == 9) {
-                tel=tel.replace(/(.{1})$/,"-$1")
-            } else if (tel.length == 10) {
-                tel=tel.replace(/(.{2})$/,"-$1")
-            } else if (tel.length == 11) {
-                tel=tel.replace(/(.{3})$/,"-$1")
-            } else if (tel.length == 12) {
-                tel=tel.replace(/(.{4})$/,"-$1")
-            } else if (tel.length > 12) {
-                tel=tel.replace(/(.{4})$/,"-$1")
-            }
-            return tel;
-        }
-        function mCNPJ(cnpj){
-            cnpj=cnpj.replace(/\D/g,"")
-            cnpj=cnpj.replace(/^(\d{2})(\d)/,"$1.$2")
-            cnpj=cnpj.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
-            cnpj=cnpj.replace(/\.(\d{3})(\d)/,".$1/$2")
-            cnpj=cnpj.replace(/(\d{4})(\d)/,"$1-$2")
-            return cnpj
-        }
-        function mCPF(cpf){
-            cpf=cpf.replace(/\D/g,"")
-            cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
-            cpf=cpf.replace(/(\d{3})(\d)/,"$1.$2")
-            cpf=cpf.replace(/(\d{3})(\d{1,2})$/,"$1-$2")
-            return cpf
-        }
-        function mRG(rg){
-            rg=rg.replace(/\D/g,"");
-            rg=rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})$/,"$1.$2.$3-$4");
-            return rg;
-        }
-        function mCEP(cep){
-            cep=cep.replace(/\D/g,"")
-            cep=cep.replace(/(\d{5})(\d{3})/,"$1-$2")
-            return cep
-        }
-        function mNum(num){
-            num=num.replace(/\D/g,"")
-            return num
-        }
-        function limpa_formulário_cep() {
-            //Limpa valores do formulário de cep.
-            document.getElementById('rua').value=("");
-            document.getElementById('bairro').value=("");
-    }
-    function meu_callback(conteudo) {
+        return tel;
+      }
+      function mCNPJ(cnpj) {
+        cnpj = cnpj.replace(/\D/g, "");
+        cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");
+        cnpj = cnpj.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+        cnpj = cnpj.replace(/\.(\d{3})(\d)/, ".$1/$2");
+        cnpj = cnpj.replace(/(\d{4})(\d)/, "$1-$2");
+        return cnpj;
+      }
+      function mCPF(cpf) {
+        cpf = cpf.replace(/\D/g, "");
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d)/, "$1.$2");
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+        return cpf;
+      }
+      function mRG(rg) {
+        rg = rg.replace(/\D/g, "");
+        rg = rg.replace(/(\d{2})(\d{3})(\d{3})(\d{1})$/, "$1.$2.$3-$4");
+        return rg;
+      }
+      function mCEP(cep) {
+        cep = cep.replace(/\D/g, "");
+        cep = cep.replace(/(\d{5})(\d{3})/, "$1-$2");
+        return cep;
+      }
+      function mNum(num) {
+        num = num.replace(/\D/g, "");
+        return num;
+      }
+      function limpa_formulário_cep() {
+        //Limpa valores do formulário de cep.
+        document.getElementById("rua").value = "";
+        document.getElementById("bairro").value = "";
+      }
+      function meu_callback(conteudo) {
         if (!("erro" in conteudo)) {
-            //Atualiza os campos com os valores.
-            var city = document.getElementById('city');
-            document.getElementById('rua').value=(conteudo.logradouro);
-            document.getElementById('bairro').value=(conteudo.bairro);
-            document.getElementById('cidade').value=(conteudo.localidade);
-            document.getElementById('uf').value=(conteudo.uf);
-            city.selectedIndex = "Três Lagoas";
-            document.getElementById('cep').onblur = function() {
-                document.getElementById('estate').selectedIndex = 12;
-            }
+          //Atualiza os campos com os valores.
+          var city = document.getElementById("city");
+          document.getElementById("rua").value = conteudo.logradouro;
+          document.getElementById("bairro").value = conteudo.bairro;
+          document.getElementById("cidade").value = conteudo.localidade;
+          document.getElementById("uf").value = conteudo.uf;
+          city.selectedIndex = "Três Lagoas";
+          document.getElementById("cep").onblur = function() {
+            document.getElementById("estate").selectedIndex = 12;
+          };
         } //end if.
         else {
-            //CEP não Encontrado.
-            limpa_formulário_cep();
-            alert("CEP não encontrado.");
+          //CEP não Encontrado.
+          limpa_formulário_cep();
+          alert("CEP não encontrado.");
         }
-    }
-        
-    function pesquisacep(valor) {
+      }
+
+      function pesquisacep(valor) {
         //Nova variável "cep" somente com dígitos.
-        var cep = valor.replace(/\D/g, '');
+        var cep = valor.replace(/\D/g, "");
         //Verifica se campo cep possui valor informado.
         if (cep != "") {
-            //Expressão regular para validar o CEP.
-            var validacep = /^[0-9]{8}$/;
-            //Valida o formato do CEP.
-            if(validacep.test(cep)) {
-                //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value="...";
-                document.getElementById('bairro').value="...";
-                document.getElementById('cidade').value="...";
-                document.getElementById('uf').value="...";
-                //Cria um elemento javascript.
-                var script = document.createElement('script');
-                //Sincroniza com o callback.
-                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-                //Insere script no documento e carrega o conteúdo.
-                document.body.appendChild(script);
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
-            }
+          //Expressão regular para validar o CEP.
+          var validacep = /^[0-9]{8}$/;
+          //Valida o formato do CEP.
+          if (validacep.test(cep)) {
+            //Preenche os campos com "..." enquanto consulta webservice.
+            document.getElementById("rua").value = "...";
+            document.getElementById("bairro").value = "...";
+            document.getElementById("cidade").value = "...";
+            document.getElementById("uf").value = "...";
+            //Cria um elemento javascript.
+            var script = document.createElement("script");
+            //Sincroniza com o callback.
+            script.src =
+              "https://viacep.com.br/ws/" +
+              cep +
+              "/json/?callback=meu_callback";
+            //Insere script no documento e carrega o conteúdo.
+            document.body.appendChild(script);
+          } //end if.
+          else {
+            //cep é inválido.
+            limpa_formulário_cep();
+            alert("Formato de CEP inválido.");
+          }
         } //end if.
         else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
+          //cep sem valor, limpa formulário.
+          limpa_formulário_cep();
         }
-    };
+      }
     </script>
-    
-</body>
+  </body>
 </html>
