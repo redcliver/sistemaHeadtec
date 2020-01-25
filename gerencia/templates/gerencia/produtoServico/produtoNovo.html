@@ -6,11 +6,11 @@
 {% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
-        <img class="iconesMenores " src="{% static '/ico/addGenreal.svg' %}"alt=""><br>
+        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}"alt=""><br>
         <span>Novo Produto/Serviço</span>
     </div>
 </div>
-<form action="/gerencia/clientesNovo/" method="POST">
+<form action="/gerencia/produtosNovo/" method="POST">
     {% csrf_token %}
     <div class="form-row">
         <div class="col-sm-12 col-md-12">
@@ -19,7 +19,7 @@
             <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" required autofocus>
         </div>
         <div class="col-sm-12 col-md-3">
-            <label >Un.</label>
+            <label >Un. Padrão</label>
             <select name="unidade" class="form-control" required>
                 <option value="1" selected >N/A</option>
                 <option value="2" >Metro</option>
@@ -30,7 +30,7 @@
         </div>
         <div class="col-sm-12 col-md-3">
             <label >Valor</label>
-            <input type="number" name="valor" value="0.00" class="form-control" step='0.01' maxlength="10" placeholder="R$0.00" required><br>
+            <input type="number" name="valor" class="form-control" step='0.01' maxlength="10" required><br>
         </div>
         <div class="col-sm-12 col-md-3">
             <label >Produto/Serviço</label>
@@ -41,7 +41,7 @@
         </div>
         <div class="col-sm-12 col-md-3">
             <label >Obs.</label>
-            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Nome" required autofocus>
+            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao" >
         </div>
         <div class="col-sm-12 col-md-12">
             <br>

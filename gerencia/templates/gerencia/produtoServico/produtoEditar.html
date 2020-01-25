@@ -1,44 +1,109 @@
 {% extends 'base_gerencia.html' %}
 {% block body %}
 {% load static %}
+{% if msgConfirmacao %}
+    <script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
         <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}"alt=""><br>
-        <span>Editar Cliente</span>
+        <span>Editar Produto/Serviço</span>
     </div>
 </div>
-<form action="/gerencia/clientesEditar/" method="POST">
+<form action="/gerencia/produtosEditar/" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="clienteID" value="{{clienteObj.id}}"/>
+    <input type="hidden" name="produtoID" value="{{produtoObj.id}}">
     <div class="form-row">
         <div class="col-sm-12 col-md-12">
             <br>
-            <label >Nome Completo</label>
-            <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome" value="{{clienteObj.nome}}" >
+            <label >Nome</label>
+            <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" value="{{produtoObj.nome}}" required autofocus>
         </div>
+        {% if produtoObj.unidade == '1' %}
         <div class="col-sm-12 col-md-3">
-            <label >Telefone</label>
-            <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Telefone" value="{{clienteObj.telefone}}" >
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" >
+                <option value="1" selected >N/A</option>
+                <option value="2" >Metro</option>
+                <option value="3" >Unidade</option>
+                <option value="4" >Hora</option>
+                <option value="5" >Dia</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '2' %}
         <div class="col-sm-12 col-md-3">
-            <label >CNPJ</label>
-            <input type="text" class="form-control" name="cnpj" maxlength="18" onkeydown="javascript: fMasc( this, mCNPJ );" placeholder="CNPJ" value="{{clienteObj.cnpj}}" >
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" >
+                <option value="1"  >N/A</option>
+                <option value="2" selected>Metro</option>
+                <option value="3" >Unidade</option>
+                <option value="4" >Hora</option>
+                <option value="5" >Dia</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '3' %}
         <div class="col-sm-12 col-md-3">
-            <label >CPF</label>
-            <input type="text" class="form-control" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" value="{{clienteObj.cpf}}" >
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" >
+                <option value="1"  >N/A</option>
+                <option value="2" >Metro</option>
+                <option value="3" selected>Unidade</option>
+                <option value="4" >Hora</option>
+                <option value="5" >Dia</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '4' %}
         <div class="col-sm-12 col-md-3">
-            <label >Data de Nasc.</label>
-            <input type="date" name="dataNascimento" class="form-control" value="{{clienteObj.dataNascimento|date:"Y-m-d"}}" >
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" >
+                <option value="1"  >N/A</option>
+                <option value="2" >Metro</option>
+                <option value="3" >Unidade</option>
+                <option value="4" selected>Hora</option>
+                <option value="5" >Dia</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '5' %}
         <div class="col-sm-12 col-md-3">
-            <label >Celular</label>
-            <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Celular" value="{{clienteObj.celular}}" >
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" >
+                <option value="1"  >N/A</option>
+                <option value="2" >Metro</option>
+                <option value="3" >Unidade</option>
+                <option value="4" >Hora</option>
+                <option value="5" selected>Dia</option>
+            </select>           
         </div>
-        <div class="col-sm-12 col-md-9">
-            <label >E-mail</label>
-            <input type="email" name="email" maxlength="300" class="form-control" placeholder="E-mail" value="{{clienteObj.email}}" >
+        {% endif %}
+        <div class="col-sm-12 col-md-3">
+            <label >Valor</label>
+            <input type="number" name="valor" class="form-control" step='0.01' maxlength="10" value="{{produtoObj.valor}}" required><br>
+        </div>
+        {% if produtoObj.prodserv == '1' %}
+        <div class="col-sm-12 col-md-3">
+            <label >Produto/Serviço</label>
+            <select name="prodserv" class="form-control" required>
+                <option value="1" selected >Produto</option>
+                <option value="2" >Serviço</option>
+            </select>           
+        </div>
+        {% endif %}
+        {% if produtoObj.prodserv == '2' %}
+        <div class="col-sm-12 col-md-3">
+            <label >Produto/Serviço</label>
+            <select name="prodserv" class="form-control" required>
+                <option value="1"  >Produto</option>
+                <option value="2" selected>Serviço</option>
+            </select>           
+        </div>
+        {% endif %}
+        <div class="col-sm-12 col-md-3">
+            <label >Obs.</label>
+            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao" value="{{produtoObj.observacao}}">
         </div>
         <div class="col-sm-12 col-md-12">
             <br>

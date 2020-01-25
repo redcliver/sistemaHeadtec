@@ -7,40 +7,80 @@
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
         <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}"alt=""><br>
-        <span>Visualizar Cliente</span>
+        <span>Visualizar Produto/Serviço</span>
     </div>
 </div>
-<form action="/gerencia/clientesEditar/">
-    <input type="hidden" name="clienteID" value="{{clienteObj.id}}"/>
+<form action="/gerencia/produtosEditar/" method="GET">
+    <input type="hidden" name="produtoID" value="{{produtoObj.id}}">
     <div class="form-row">
         <div class="col-sm-12 col-md-12">
             <br>
-            <label >Nome Completo</label>
-            <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome" value="{{clienteObj.nome}}" disabled>
+            <label >Nome</label>
+            <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" value="{{produtoObj.nome}}" disabled>
         </div>
+        {% if produtoObj.unidade == '1' %}
         <div class="col-sm-12 col-md-3">
-            <label >Telefone</label>
-            <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Telefone" value="{{clienteObj.telefone}}" disabled>
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" disabled>
+                <option value="1" selected >N/A</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '2' %}
         <div class="col-sm-12 col-md-3">
-            <label >CNPJ</label>
-            <input type="text" class="form-control" name="cnpj" maxlength="14" onkeydown="javascript: fMasc( this, mCNPJ );" placeholder="CNPJ" value="{{clienteObj.cnpj}}" disabled>
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" disabled>
+                <option value="2" selected >Metro</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '3' %}
         <div class="col-sm-12 col-md-3">
-            <label >CPF</label>
-            <input type="text" class="form-control" name="cpf" maxlength="13" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" value="{{clienteObj.cpf}}" disabled>
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" disabled>
+                <option value="3" selected >Unidade</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '4' %}
         <div class="col-sm-12 col-md-3">
-            <label >Data de Nasc.</label>
-            <input type="text" name="dataNascimento" class="form-control" value="{{clienteObj.dataNascimento|date:"d/m/Y"}}" disabled>
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" disabled>
+                <option value="4" selected >Hora</option>
+            </select>           
         </div>
+        {% endif %}
+        {% if produtoObj.unidade == '5' %}
         <div class="col-sm-12 col-md-3">
-            <label >Celular</label>
-            <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Celular" value="{{clienteObj.celular}}" disabled>
+            <label >Un. Padrão</label>
+            <select name="unidade" class="form-control" disabled>
+                <option value="5" selected >Dia</option>
+            </select>           
         </div>
-        <div class="col-sm-12 col-md-9">
-            <label >E-mail</label>
-            <input type="email" name="email" maxlength="300" class="form-control" placeholder="E-mail" value="{{clienteObj.email}}" disabled>
+        {% endif %}
+        <div class="col-sm-12 col-md-3">
+            <label >Valor</label>
+            <input type="number" name="valor" class="form-control" step='0.01' maxlength="10" value="{{produtoObj.valor}}" disabled>
+        </div>
+        {% if produtoObj.prodserv == '1' %}
+        <div class="col-sm-12 col-md-3">
+            <label >Produto/Serviço</label>
+            <select name="prodserv" class="form-control" disabled>
+                <option value="1" selected >Produto</option>
+            </select>           
+        </div>
+        {% endif %}
+        {% if produtoObj.prodserv == '2' %}
+        <div class="col-sm-12 col-md-3">
+            <label >Produto/Serviço</label>
+            <select name="prodserv" class="form-control" disabled>
+                <option value="2" selected >Serviço</option>
+            </select>           
+        </div>
+        {% endif %}
+        <div class="col-sm-12 col-md-3">
+            <label >Obs.</label>
+            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao" value="{{produtoObj.observacao}}" disabled>
         </div>
         <div class="col-sm-12 col-md-12">
             <br>
