@@ -1,0 +1,52 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+{% if msgConfirmacao %}
+    <script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 float-left">
+        <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}"alt=""><br>
+        <span>Visualizar Cliente</span>
+    </div>
+</div>
+<form action="/gerencia/clientesEditar/">
+    <input type="hidden" name="clienteID" value="{{clienteObj.id}}"/>
+    <div class="form-row">
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <label >Nome Completo</label>
+            <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome" value="{{clienteObj.nome}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Telefone</label>
+            <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Telefone" value="{{clienteObj.telefone}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >CNPJ</label>
+            <input type="text" class="form-control" name="cnpj" maxlength="14" onkeydown="javascript: fMasc( this, mCNPJ );" placeholder="CNPJ" value="{{clienteObj.cnpj}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >CPF</label>
+            <input type="text" class="form-control" name="cpf" maxlength="13" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" value="{{clienteObj.cpf}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Data de Nasc.</label>
+            <input type="text" name="dataNascimento" class="form-control" value="{{clienteObj.dataNascimento|date:"d/m/Y"}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Celular</label>
+            <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Celular" value="{{clienteObj.celular}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-9">
+            <label >E-mail</label>
+            <input type="email" name="email" maxlength="300" class="form-control" placeholder="E-mail" value="{{clienteObj.email}}" disabled>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>
+            <input class="btn btn-outline-success float-right"  type="submit" value="Editar" />
+        </div>
+    </div>
+</form>
+{% endblock %}

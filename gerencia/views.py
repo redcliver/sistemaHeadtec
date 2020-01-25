@@ -302,3 +302,141 @@ def produtosEditar(request):
                                                                 'msgConfirmacao':msgConfirmacao})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
+    
+def orcamentosHome(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+                
+            return render (request, 'gerencia/orcamento/orcamentoHome.html', {'title':'Orçamentos', 
+                                                            'msgTelaInicial':msgTelaInicial})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+    
+def orcamentosNovo(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            today = now
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'POST' and request.POST.get('nome') != None:
+                nome = request.POST.get('nome')
+                unidade = request.POST.get('unidade')
+                valor = request.POST.get('valor')
+                prodserv = request.POST.get('prodserv')
+                observacao = request.POST.get('observacao')
+                newProduto = produtoModel(nome=nome, unidade=unidade, valor=valor, prodserv=prodserv, observacao=observacao)
+                newProduto.save()
+                msgConfirmacao = "Produto/Serviço cadastrado com sucesso!"
+                return render (request, 'gerencia/orcamento/orcamentoNovo.html', {'title':'Novo Oreçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today,
+                                                            'msgConfirmacao':msgConfirmacao})
+            return render (request, 'gerencia/orcamento/orcamentoNovo.html', {'title':'Novo Oreçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+
+def orcamentosBusca(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            produtosAtivos = produtoModel.objects.filter(estado=1, prodserv=1).all().order_by('nome')
+            servicosAtivos = produtoModel.objects.filter(estado=1, prodserv=2).all().order_by('nome')
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+                
+            return render (request, 'gerencia/orcamento/orcamentoBusca.html', {'title':'Buscar Oreçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'produtosAtivos':produtosAtivos,
+                                                            'servicosAtivos':servicosAtivos})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+
+def orcamentosVisualizar(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'POST' and request.POST.get('produtoID') != None:
+                produtoID = request.POST.get('produtoID')
+                produtoObj = produtoModel.objects.filter(id=produtoID).get()
+                return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Oreçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'produtoObj':produtoObj})
+            return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Oreçamento', 
+                                                            'msgTelaInicial':msgTelaInicial})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+
+def orcamentosEditar(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'GET':
+                produtoID = request.GET.get('produtoID')
+                produtoObj = produtoModel.objects.filter(id=produtoID).get()
+                return render (request, 'gerencia/orcamento/orcamentoEditar.html', {'title':'Editar Oreçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'produtoObj':produtoObj})
+            if request.method == 'POST' and request.POST.get('produtoID') != None:
+                produtoID = request.POST.get('produtoID')
+                produtoObj = produtoModel.objects.filter(id=produtoID).get()
+
+                nome = request.POST.get('nome')
+                unidade = request.POST.get('unidade')
+                valor = request.POST.get('valor')
+                prodserv = request.POST.get('prodserv')
+                observacao = request.POST.get('observacao')
+
+                produtoObj.nome = nome 
+                produtoObj.unidade = unidade
+                produtoObj.valor = valor
+                produtoObj.prodserv = prodserv
+                produtoObj.observacao = observacao
+                produtoObj.save()
+                
+                msgConfirmacao = "Produto/Serviço editado com sucesso!"
+                return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Oreçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'produtoObj':produtoObj,
+                                                                'msgConfirmacao':msgConfirmacao})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})

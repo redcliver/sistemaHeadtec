@@ -1,0 +1,26 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+<form action="/gerencia/clientesVisualizar/" method="POST">    
+    {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-sm-12 col-md-12 float-left">
+                <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}"alt=""/><br>
+                <span>Buscar Cliente</span>
+            </div>
+            <div class="form-group col-sm-12 col-md-12">
+                <label >Nome</label>
+                <select name="clienteID" class="form-control" required>
+                    <option disabled selected > -- Clientes -- </option>
+                    {% for clienteModel in clientesAtivos %}
+                        <option value={{clienteModel.id}}>{{clienteModel.nome}}</option>
+                    {% endfor %}
+                </select>        </div>
+            <div class="form-group col-sm-12 col-md-12">
+                <br>
+                <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>
+                <input class="btn btn-outline-success float-right"  type="submit" value="VIsualizar" />
+            </div>
+        </div>
+</form>
+{% endblock %}
