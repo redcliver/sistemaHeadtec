@@ -1,47 +1,46 @@
 {% extends 'base_gerencia.html' %}
 {% block body %}
 {% load static %}
+{% if msgConfirmacao %}
+    <script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
         <img class="iconesMenores " src="{% static '/ico/add-cliente.svg' %}"alt=""><br>
         <span>Novo Cliente</span>
     </div>
 </div>
-<form action="/gerencia/clientesNovo/">
+<form action="/gerencia/clientesNovo/" method="POST">
+    {% csrf_token %}
     <div class="form-row">
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-12 col-md-12">
             <br>
-            <label >Nome</label>
-            <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome">
-        </div>
-        <div class="col-sm-12 col-md-7">
-            <br>
-            <label >Sobrenome</label>
-            <input type="text" name="sobrenome" class="form-control" maxlength="400" placeholder="Sobrenome">
+            <label >Nome Completo</label>
+            <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome Completo" required autofocus>
         </div>
         <div class="col-sm-12 col-md-3">
             <label >Telefone</label>
-            <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );">
+            <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Telefone">
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >CNPJ</label>
+            <input type="text" class="form-control" name="cnpj" maxlength="18" onkeydown="javascript: fMasc( this, mCNPJ );" placeholder="CNPJ">
         </div>
         <div class="col-sm-12 col-md-3">
             <label >CPF</label>
-            <input type="text" class="form-control" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mCPF );">
-        </div>
-        <div class="col-sm-12 col-md-3">
-            <label >RG</label>
-            <input type="text" class="form-control" name="rg" maxlength="13" onkeydown="javascript: fMasc( this, mRG );">
+            <input type="text" class="form-control" name="cpf" maxlength="14" onkeydown="javascript: fMasc( this, mRG );" placeholder="RG">
         </div>
         <div class="col-sm-12 col-md-3">
             <label >Data de Nasc.</label>
-            <input type="date" name="dataNasc" value="{{today}}" class="form-control">
+            <input type="date" name="dataNascimento" value="{{today|date:"Y-m-d"}}" class="form-control">
         </div>
         <div class="col-sm-12 col-md-3">
             <label >Celular</label>
-            <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );">
+            <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Celular">
         </div>
         <div class="col-sm-12 col-md-9">
             <label >E-mail</label>
-            <input type="email" name="email" maxlength="300" class="form-control">
+            <input type="email" name="email" maxlength="300" class="form-control" placeholder="E-mail">
         </div>
         <div class="col-sm-12 col-md-12">
             <br>

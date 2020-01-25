@@ -1,0 +1,53 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+{% if msgConfirmacao %}
+    <script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 float-left">
+        <img class="iconesMenores " src="{% static '/ico/addGenreal.svg' %}"alt=""><br>
+        <span>Novo Produto/Serviço</span>
+    </div>
+</div>
+<form action="/gerencia/clientesNovo/" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <label >Nome</label>
+            <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" required autofocus>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Un.</label>
+            <select name="unidade" class="form-control" required>
+                <option value="1" selected >N/A</option>
+                <option value="2" >Metro</option>
+                <option value="3" >Unidade</option>
+                <option value="4" >Hora</option>
+                <option value="5" >Dia</option>
+            </select>           
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Valor</label>
+            <input type="number" name="valor" value="0.00" class="form-control" step='0.01' maxlength="10" placeholder="R$0.00" required><br>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Produto/Serviço</label>
+            <select name="prodserv" class="form-control" required>
+                <option value="1" selected >Produto</option>
+                <option value="2" >Serviço</option>
+            </select>           
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label >Obs.</label>
+            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Nome" required autofocus>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>
+            <input class="btn btn-outline-success float-right"  type="submit" value="Cadastrar" />
+        </div>
+    </div>
+</form>
+{% endblock %}

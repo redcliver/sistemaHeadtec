@@ -10,12 +10,13 @@
             </div>
             <div class="form-group col-sm-12 col-md-12">
                 <label >Nome</label>
-                <select name="clienteID" class="form-control" required>
+                <select name="produtoID" class="form-control" required>
                     <option disabled selected > -- Clientes -- </option>
-                    {% for clienteModel in clientesAtivos %}
+                    {% for produtoModel in produtosAtivos %}
                         <option value={{clienteModel.id}}>{{clienteModel.nome}}</option>
                     {% endfor %}
-                </select>        </div>
+                </select>        
+            </div>
             <div class="form-group col-sm-12 col-md-12">
                 <br>
                 <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>

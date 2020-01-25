@@ -1,0 +1,21 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+<div class="row">
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/produtosNovo" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/addGeneral.svg' %}"alt=""><br />
+        Novo Produto/Serviço</a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/produtosBusca" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/visualizar.svg' %}"alt=""><br />
+        Visualizar Produto/Serviço</a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="#" onclick="goBack()" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/voltar.svg' %}"alt=""><br />
+        Voltar</a>
+    </div>
+</div>
+{% endblock %}

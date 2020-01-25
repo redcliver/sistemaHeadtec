@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'clientesNovo/', views.clientesNovo),
     url(r'clientesBusca/', views.clientesBusca),
     url(r'clientesVisualizar/', views.clientesVisualizar),
+    url(r'clientesEditar/', views.clientesEditar),
 ]
