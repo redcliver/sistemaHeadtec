@@ -107,6 +107,13 @@ def clientesVisualizar(request):
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
             elif now >= 18 and now < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'GET' and request.GET.get('clienteID') != None:
+                clienteID = request.GET.get('clienteID')
+                clienteObj = clienteModel.objects.filter(id=clienteID).get()
+                return render (request, 'gerencia/cliente/clienteVisualizar.html', {'title':'Visualizar Cliente', 
+                                                                            'msgTelaInicial':msgTelaInicial,
+                                                                            'clienteObj':clienteObj})
+                                                                            
             if request.method == 'POST' and request.POST.get('clienteID') != None:
                 clienteID = request.POST.get('clienteID')
                 clienteObj = clienteModel.objects.filter(id=clienteID).get()
@@ -114,7 +121,7 @@ def clientesVisualizar(request):
                                                                 'msgTelaInicial':msgTelaInicial,
                                                                 'clienteObj':clienteObj})
             return render (request, 'gerencia/cliente/clienteVisualizar.html', {'title':'Visualizar Cliente', 
-                                                            'msgTelaInicial':msgTelaInicial})
+                                                                            'msgTelaInicial':msgTelaInicial})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 
@@ -328,12 +335,21 @@ def orcamentosNovo(request):
             now = now.hour
             today = now
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
             if now >= 4 and now <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
             elif now > 11 and now < 18:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
             elif now >= 18 and now < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'GET' and request.GET.get('clienteID') != None:
+                clienteID = request.GET.get('clienteID')
+                clienteObj = clienteModel.models.filter(id=clienteID).get()
+                return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Oreçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'today':today,
+                                                                'clienteObj':clienteObj})
+
             if request.method == 'POST' and request.POST.get('nome') != None:
                 nome = request.POST.get('nome')
                 unidade = request.POST.get('unidade')
@@ -349,7 +365,8 @@ def orcamentosNovo(request):
                                                             'msgConfirmacao':msgConfirmacao})
             return render (request, 'gerencia/orcamento/orcamentoNovo.html', {'title':'Novo Oreçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
-                                                            'today':today})
+                                                            'today':today,
+                                                            'clientesAtivos':clientesAtivos})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 

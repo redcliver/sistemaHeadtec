@@ -15,17 +15,14 @@
     <div class="form-row">
         <div class="form-group col-sm-12 col-md-12">
             <label >Cliente</label>
-            <select name="clienteID" class="form-control" required>
-                <option disabled selected > -- Clientes -- </option>
-                {% for clienteModel in clientesAtivos %}
-                    <option value={{clienteModel.id}}>{{clienteModel.nome}}</option>
-                {% endfor %}
+            <select name="clienteID" class="form-control" disabled>
+                    <option value={{clienteObj.id}}>{{clienteObj.nome}}</option>
             </select>        
         </div>
         <div class="col-sm-12 col-md-12">
             <br>
             <input class="btn btn-outline-secondary float-left"  type="submit" value="Voltar" formmethod="GET" formaction="/gerencia/orcamentosHome" />
-            <input class="btn btn-outline-success float-right"  type="submit" value="Próximo" />
+            <input class="btn btn-outline-success float-right"  type="submit" value="Salvar" />
         </div>
     </div>
 </form>
