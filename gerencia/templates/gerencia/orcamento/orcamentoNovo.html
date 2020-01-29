@@ -10,15 +10,15 @@
         <span>Novo Orçamento</span>
     </div>
 </div>
-<form action="/gerencia/orcamentosNovo/" method="POST">
-    {% csrf_token %}
+<form action="/gerencia/orcamentosNovo/" method="GET">
     <div class="form-row">
         <div class="form-group col-sm-12 col-md-12">
+            <br>
             <label >Cliente</label>
             <select name="clienteID" class="form-control" required>
                 <option disabled selected > -- Clientes -- </option>
                 {% for clienteModel in clientesAtivos %}
-                    <option value={{clienteModel.id}}>{{clienteModel.nome}}</option>
+                    <option value="{{clienteModel.id}}">{{clienteModel.nome}}</option>
                 {% endfor %}
             </select>        
         </div>

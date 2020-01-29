@@ -21,7 +21,7 @@ class clienteModel(models.Model):
     
     def __str__(self):
         return self.nome
-        
+
 class produtoModel(models.Model):
     ST = (
         ('1', 'Ativo'),
@@ -50,3 +50,32 @@ class produtoModel(models.Model):
     
     def __str__(self):
         return self.nome
+        
+class produtoItemModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    produto = models.ForeignKey(produtoModel, on_delete=models.CASCADE)
+    quantidade = models.CharField(max_length=15, default=1)
+    data_cadastro = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.produto.nome
+
+class orcamentoModel(models.Model):
+    ES = (
+        ('1', 'Aberto'),
+        ('2', 'Finalizado'),
+        ('3', 'Cancelado'),
+    )
+    id = models.AutoField(primary_key=True)
+    estado = models.CharField(max_length=1, choices=ES, default=1)
+    produtoItem = models.ManyToManyField(produtoItemModel)
+    cliente = models.ForeignKey(clienteModel, on_delete=models.CASCADE)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    desconto = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    obs = models.CharField(max_length=1000, null=True, blank=True)
+    dataFechamento = models.DateTimeField(default=timezone.now)
+    dataCadastro = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.cliente.nome
