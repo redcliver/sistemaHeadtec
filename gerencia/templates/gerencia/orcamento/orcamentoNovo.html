@@ -2,11 +2,11 @@
 {% block body %}
 {% load static %}
 {% if msgConfirmacao %}
-    <script>alert('{{msgConfirmacao}}')</script>
+<script>alert('{{msgConfirmacao}}')</script>
 {% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
-        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}"alt=""><br>
+        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}" alt=""><br>
         <span>Novo Orçamento</span>
     </div>
 </div>
@@ -14,18 +14,19 @@
     <div class="form-row">
         <div class="form-group col-sm-12 col-md-12">
             <br>
-            <label >Cliente</label>
+            <label>Cliente</label>
             <select name="clienteID" class="form-control" required>
-                <option disabled selected > -- Clientes -- </option>
+                <option disabled selected> -- Clientes -- </option>
                 {% for clienteModel in clientesAtivos %}
-                    <option value="{{clienteModel.id}}">{{clienteModel.nome}}</option>
+                <option value="{{clienteModel.id}}">{{clienteModel.nome}}</option>
                 {% endfor %}
-            </select>        
+            </select>
         </div>
         <div class="col-sm-12 col-md-12">
             <br>
-            <input class="btn btn-outline-secondary float-left"  type="submit" value="Voltar" formmethod="GET" formaction="/gerencia/orcamentosHome" />
-            <input class="btn btn-outline-success float-right"  type="submit" value="Próximo" />
+            <input class="btn btn-outline-secondary float-left" type="submit" value="Voltar"
+                formaction="/gerencia/orcamentosHome" />
+            <input class="btn btn-outline-success float-right" type="submit" value="Próximo" />
         </div>
     </div>
 </form>

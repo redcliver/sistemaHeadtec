@@ -2,11 +2,11 @@
 {% block body %}
 {% load static %}
 {% if msgConfirmacao %}
-    <script>alert('{{msgConfirmacao}}')</script>
+<script>alert('{{msgConfirmacao}}')</script>
 {% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
-        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}"alt=""><br>
+        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}" alt=""><br>
         <span>Novo Orçamento</span>
     </div>
 </div>
@@ -17,81 +17,87 @@
         <input type="hidden" name="clienteID" value="{{clienteObjto.id}}" />
         <div class="form-group col-sm-12 col-md-12">
             <br>
-            <label >Cliente</label>
-            <input type="text" name="nome" value="{{clienteObjto.nome}}" class="form-control" maxlength="300" placeholder="Nome Completo" disabled >
+            <label>Cliente</label>
+            <input type="text" name="nome" value="{{clienteObjto.nome}}" class="form-control" maxlength="300"
+                placeholder="Nome Completo" disabled>
         </div>
         {% endif %}
         {% if orcamentoObj %}
         <input type="hidden" name="orcamentoID" value="{{orcamentoObj.id}}" />
         <div class="form-group col-sm-12 col-md-12">
             <br>
-            <label >Cliente</label>
-            <input type="text" name="nome" value="{{orcamentoObj.cliente.nome}}" class="form-control" maxlength="300" placeholder="Nome Completo" disabled >
+            <label>Cliente</label>
+            <input type="text" name="nome" value="{{orcamentoObj.cliente.nome}}" class="form-control" maxlength="300"
+                placeholder="Nome Completo" disabled>
         </div>
         {% endif %}
         <div class="form-group col-sm-8 col-md-4">
-            <label >Produto</label>
-            <select name="produtoID" class="form-control" >
-                <option disabled selected > -- Produtos -- </option>
+            <label>Produto</label>
+            <select name="produtoID" class="form-control">
+                <option disabled selected> -- Produtos -- </option>
                 {% for produtoModel in produtosAtivos %}
-                    <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
+                <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
                 {% endfor %}
-            </select>    
+            </select>
         </div>
         <div class="form-group col-sm-4 col-md-1">
-            <label >Qnt.</label>
-            <input type="number" name="qntProd" step="0.1" class="form-control" maxlength="5" placeholder="0" >
+            <label>Qnt.</label>
+            <input type="number" name="qntProd" step="0.1" class="form-control" maxlength="5" placeholder="0">
         </div>
         <div class="form-group col-sm-0 col-md-2">
         </div>
         <div class="form-group col-sm-8 col-md-4">
-            <label >Serviço</label>
-            <select name="servicoID" class="form-control" >
-                <option disabled selected > -- Serviços -- </option>
+            <label>Serviço</label>
+            <select name="servicoID" class="form-control">
+                <option disabled selected> -- Serviços -- </option>
                 {% for produtoModel in servicosAtivos %}
-                    <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
+                <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
                 {% endfor %}
-            </select>     
+            </select>
         </div>
         <div class="form-group col-sm-4 col-md-1">
-            <label >Qnt.</label>
-            <input type="number" name="qntServ" step="0.1" class="form-control" maxlength="5" placeholder="0" >
+            <label>Qnt.</label>
+            <input type="number" name="qntServ" step="0.1" class="form-control" maxlength="5" placeholder="0">
         </div>
         {% if orcamentoObj %}
         <div class="form-group col-sm-12 col-md-12">
             <table class="table">
                 <thead>
-                  <tr class="cabecalhoTable">
-                    <th width="5%" scope="col">#</th>
-                    <th width="70%" scope="col">Itens</th>
-                    <th width="10%" scope="col">Valor Un.</th>
-                    <th width="10%" scope="col" class="text-right">Valor Total</th>
-                    <th width="5%" scope="col">Excluir</th>
-                  </tr>
+                    <tr class="cabecalhoTable">
+                        <th width="5%" scope="col">#</th>
+                        <th width="60%" scope="col">Itens</th>
+                        <th width="10%" scope="col">Valor Un.</th>
+                        <th width="10%" scope="col">Qnt.</th>
+                        <th width="10%" scope="col" class="text-right">Valor Total</th>
+                        <th width="5%" scope="col">Excluir</th>
+                    </tr>
                 </thead>
-                <tbody>    
-                {% if orcamentoObj.produtoItem %}
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>{{orcamentoObj.produtoItem}}</td>
-                    <td>Produto</td>
-                    <td class="text-right">Produto</td>
-                    <td><button class="btn btn-outline-danger "  type="submit" value="" >X</button>
-                    </td>
-                  </tr>
-                {% endif %}
-                {% if orcamentoObj.produtoItem.produto.prodserv == 2 %}
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Servico</td>
-                    <td>Servico</td>
-                    <td class="text-right">Servico</td>
-                    <td><button class="btn btn-outline-danger "  type="submit" value="" >X</button>
-                    </td>
-                  </tr>
-                {% endif %}
+                <tbody>
+                    {% if orcamentoObj.produtoItem %}
+                    {% for produtoItemModel in orcamentoObj.produtoItem.all %}
+                    <tr>
+                        <th scope="row">{{produtoItemModel.produto.id}}</th>
+                        <td>{{produtoItemModel.produto.nome}}</td>
+                        <td>R$ {{produtoItemModel.produto.valor}}</td>
+                        <td>{{produtoItemModel.quantidade}}</td>
+                        <td class="text-right">Produto</td>
+                        <td><button class="btn btn-outline-danger " type="submit" value="">X</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    {% if orcamentoObj.produtoItem.produto.prodserv == 2 %}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Servico</td>
+                        <td>Servico</td>
+                        <td class="text-right">Servico</td>
+                        <td><button class="btn btn-outline-danger " type="submit" value="">X</button>
+                        </td>
+                    </tr>
+                    {% endif %}
                 </tbody>
-              </table>
+            </table>
         </div>
         <div class="form-group col-sm-12 col-md-12">
             <label class="totalOrc float-right">Total: R$ {{orcamentoObj.total}}</label>
@@ -99,13 +105,13 @@
         {% endif %}
         <div class="col-sm-12 col-md-12">
             <br>
-            <div class="float-right">        
-                <input class="btn btn-outline-success "  type="submit" value="Adicinar Itens" />&nbsp;&nbsp;&nbsp;
-                <input class="btn btn-outline-success "  type="submit" value="Finalizar" />
+            <div class="float-right">
+                <input class="btn btn-outline-success " type="submit" value="Adicinar Itens" />&nbsp;&nbsp;&nbsp;
+                <input class="btn btn-outline-success " type="submit" value="Finalizar" />
             </div>
             <div class="cancelarOrc">
-                <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Cancelar</button> 
-            </div>   
+                <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Cancelar</button>
+            </div>
         </div>
     </div>
 </form>

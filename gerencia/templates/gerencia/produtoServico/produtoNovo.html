@@ -2,11 +2,11 @@
 {% block body %}
 {% load static %}
 {% if msgConfirmacao %}
-    <script>alert('{{msgConfirmacao}}')</script>
+<script>alert('{{msgConfirmacao}}')</script>
 {% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
-        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}"alt=""><br>
+        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}" alt=""><br>
         <span>Novo Produto/Serviço</span>
     </div>
 </div>
@@ -15,39 +15,40 @@
     <div class="form-row">
         <div class="col-sm-12 col-md-12">
             <br>
-            <label >Nome</label>
-            <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" required autofocus>
+            <label>Nome</label>
+            <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" autofocus>
         </div>
         <div class="col-sm-12 col-md-3">
-            <label >Un. Padrão</label>
-            <select name="unidade" class="form-control" required>
-                <option value="1" selected >N/A</option>
-                <option value="2" >Metro</option>
-                <option value="3" >Unidade</option>
-                <option value="4" >Hora</option>
-                <option value="5" >Dia</option>
-            </select>           
+            <label>Un. Padrão</label>
+            <select name="unidade" class="form-control">
+                <option value="1" selected>N/A</option>
+                <option value="2">Metro</option>
+                <option value="3">Unidade</option>
+                <option value="4">Hora</option>
+                <option value="5">Dia</option>
+            </select>
         </div>
         <div class="col-sm-12 col-md-3">
-            <label >Valor</label>
-            <input type="number" name="valor" class="form-control" step='0.01' maxlength="10" required><br>
+            <label>Valor</label>
+            <input type="number" name="valor" class="form-control" step='0.01' maxlength="10"><br>
         </div>
         <div class="col-sm-12 col-md-3">
-            <label >Produto/Serviço</label>
-            <select name="prodserv" class="form-control" required>
-                <option value="1" selected >Produto</option>
-                <option value="2" >Serviço</option>
-            </select>           
+            <label>Produto/Serviço</label>
+            <select name="prodserv" class="form-control">
+                <option value="1" selected>Produto</option>
+                <option value="2">Serviço</option>
+            </select>
         </div>
         <div class="col-sm-12 col-md-3">
-            <label >Obs.</label>
-            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao" >
+            <label>Obs.</label>
+            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao">
         </div>
         <div class="col-sm-12 col-md-12">
             <br>
 
-            <input class="btn btn-outline-secondary float-left"  type="submit" value="Voltar" formmethod="GET" formaction="/gerencia/produtosHome" />
-            <input class="btn btn-outline-success float-right"  type="submit" value="Cadastrar" />
+            <input class="btn btn-outline-secondary float-left" type="submit" value="Voltar" formmethod="GET"
+                formaction="/gerencia/produtosHome" />
+            <input class="btn btn-outline-success float-right" type="submit" value="Cadastrar" />
         </div>
     </div>
 </form>

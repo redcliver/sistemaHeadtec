@@ -370,21 +370,21 @@ def orcamentosNovo(request):
                     servObj = produtoModel.objects.filter(id=servicoIDPost).get()
                     servItemObj = produtoItemModel(produto=servObj, quantidade=qntServ)
                     servItemObj.save()
-                orcamentoObj = orcamentoModel(cliente=clienteObj)
-                orcamentoObj.save()
+                orcamentoObjNew = orcamentoModel(cliente=clienteObj)
+                orcamentoObjNew.save()
                 try:
-                    orcamentoObj.produtoItem.add(prodItemObj)
+                    orcamentoObjNew.produtoItem.add(prodItemObj)
                 except:
-                    orcamentoObj.save()
+                    orcamentoObjNew.save()
                 try:
-                    orcamentoObj.produtoItem.add(servItemObj)
+                    orcamentoObjNew.produtoItem.add(servItemObj)
                 except:
-                    orcamentoObj.save()
-                orcamentoObj.save()
+                    orcamentoObjNew.save()
+                orcamentoObjNew.save()
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
-                                                            'orcamentoObj':orcamentoObj,
+                                                            'orcamentoObj':orcamentoObjNew,
                                                             'produtosAtivos':produtosAtivos,
                                                             'servicosAtivos':servicosAtivos})
             if request.method == 'POST' and request.POST.get('orcamentoID') != None:

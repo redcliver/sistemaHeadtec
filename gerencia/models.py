@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+
+
 class clienteModel(models.Model):
     ST = (
         ('1', 'Ativo'),
@@ -14,13 +16,15 @@ class clienteModel(models.Model):
     telefone = models.CharField(max_length=15, null=True, blank=True)
     cnpj = models.CharField(max_length=30, null=True, blank=True)
     cpf = models.CharField(max_length=30, null=True, blank=True)
-    dataNascimento = models.DateTimeField(default=timezone.now, null=True, blank=True)
+    dataNascimento = models.DateTimeField(
+        default=timezone.now, null=True, blank=True)
     celular = models.CharField(max_length=15, null=True, blank=True)
     email = models.CharField(max_length=300, null=True, blank=True)
     dataCadastro = models.DateTimeField(default=timezone.now)
-    
+
     def __str__(self):
         return self.nome
+
 
 class produtoModel(models.Model):
     ST = (
@@ -47,18 +51,21 @@ class produtoModel(models.Model):
     observacao = models.CharField(max_length=200, null=True, blank=True)
     valor = models.CharField(max_length=15, null=True, blank=True)
     dataCadastro = models.DateTimeField(default=timezone.now)
-    
+
     def __str__(self):
         return self.nome
-        
+
+
 class produtoItemModel(models.Model):
     id = models.AutoField(primary_key=True)
     produto = models.ForeignKey(produtoModel, on_delete=models.CASCADE)
     quantidade = models.CharField(max_length=15, default=1)
+    total = models.CharField(max_length=15, null=True, blank=True)
     data_cadastro = models.DateTimeField(default=timezone.now)
-    
+
     def __str__(self):
         return self.produto.nome
+
 
 class orcamentoModel(models.Model):
     ES = (
@@ -76,6 +83,6 @@ class orcamentoModel(models.Model):
     obs = models.CharField(max_length=1000, null=True, blank=True)
     dataFechamento = models.DateTimeField(default=timezone.now)
     dataCadastro = models.DateTimeField(default=timezone.now)
-    
+
     def __str__(self):
         return self.cliente.nome
