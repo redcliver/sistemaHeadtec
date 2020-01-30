@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import datetime
+import decimal
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from .models import clienteModel, produtoModel, orcamentoModel, produtoItemModel
@@ -339,6 +340,11 @@ def orcamentosNovo(request):
             clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
             produtosAtivos = produtoModel.objects.filter(prodserv=1).all().order_by('nome')
             servicosAtivos = produtoModel.objects.filter(prodserv=2).all().order_by('nome')
+            try:
+                orcamentoIDPost = request.POST.get('orcamentoID')
+                orcamentoObjPost = orcamentoModel.objects.filter(id=orcamentoIDPost).get()
+            except:
+                orcamentoObjPost = None
             if now >= 4 and now <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
             elif now > 11 and now < 18:
@@ -355,31 +361,29 @@ def orcamentosNovo(request):
                                                             'produtosAtivos':produtosAtivos,
                                                             'servicosAtivos':servicosAtivos})
 
-            if request.method == 'POST' and request.POST.get('clienteID') != None:
+            if request.method == 'POST' and request.POST.get('clienteID') != None and orcamentoObjPost == None:
                 clienteIDPost = request.POST.get('clienteID')
                 clienteObj = clienteModel.objects.filter(id=clienteIDPost).get()
+                orcamentoObjNew = orcamentoModel(cliente=clienteObj)
+                orcamentoObjNew.save()
                 if request.POST.get('produtoID') != None: 
                     produtoIDPost = request.POST.get('produtoID')
                     qntProd = request.POST.get('qntProd')
                     prodObj = produtoModel.objects.filter(id=produtoIDPost).get()
-                    prodItemObj = produtoItemModel(produto=prodObj, quantidade=qntProd)
+                    prodVlrTotal = decimal.Decimal(prodObj.valor) * int(qntProd)
+                    prodItemObj = produtoItemModel(produto=prodObj, quantidade=qntProd, total=prodVlrTotal)
                     prodItemObj.save()
+                    orcamentoObjNew.produtoItem.add(prodItemObj)
+                    orcamentoObjNew.total = decimal.Decimal(orcamentoObjNew.total) + decimal.Decimal(prodItemObj.total) 
                 if request.POST.get('servicoID') != None:
                     servicoIDPost = request.POST.get('servicoID')
                     qntServ = request.POST.get('qntServ')
                     servObj = produtoModel.objects.filter(id=servicoIDPost).get()
-                    servItemObj = produtoItemModel(produto=servObj, quantidade=qntServ)
+                    serVlrTotal = decimal.Decimal(servObj.valor) * int(qntServ)
+                    servItemObj = produtoItemModel(produto=servObj, quantidade=qntServ, total=serVlrTotal)
                     servItemObj.save()
-                orcamentoObjNew = orcamentoModel(cliente=clienteObj)
-                orcamentoObjNew.save()
-                try:
-                    orcamentoObjNew.produtoItem.add(prodItemObj)
-                except:
-                    orcamentoObjNew.save()
-                try:
                     orcamentoObjNew.produtoItem.add(servItemObj)
-                except:
-                    orcamentoObjNew.save()
+                    orcamentoObjNew.total = decimal.Decimal(orcamentoObjNew.total) + decimal.Decimal(servItemObj.total) 
                 orcamentoObjNew.save()
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
@@ -387,25 +391,25 @@ def orcamentosNovo(request):
                                                             'orcamentoObj':orcamentoObjNew,
                                                             'produtosAtivos':produtosAtivos,
                                                             'servicosAtivos':servicosAtivos})
-            if request.method == 'POST' and request.POST.get('orcamentoID') != None:
-                orcamentoIDPost = request.POST.get('orcamentoID')
-                orcamentoObjPost = orcamentoModel.objects.filter(id=orcamentoIDPost).get()
+            if request.method == 'POST' and orcamentoObjPost != None:
                 if request.POST.get('produtoID') != None: 
                     produtoIDPost = request.POST.get('produtoID')
                     qntProd = request.POST.get('qntProd')
                     prodObj = produtoModel.objects.filter(id=produtoIDPost).get()
-                    prodItemObj = produtoItemModel(produto=prodObj, quantidade=qntProd)
+                    prodVlrTotal = decimal.Decimal(prodObj.valor) * int(qntProd)
+                    prodItemObj = produtoItemModel(produto=prodObj, quantidade=qntProd, total=prodVlrTotal)
                     prodItemObj.save()
+                    orcamentoObjPost.produtoItem.add(prodItemObj)
+                    orcamentoObjPost.total = orcamentoObjPost.total + prodItemObj.total 
                 if request.POST.get('servicoID') != None:
                     servicoIDPost = request.POST.get('servicoID')
                     qntServ = request.POST.get('qntServ')
                     servObj = produtoModel.objects.filter(id=servicoIDPost).get()
-                    servItemObj = produtoItemModel(produto=servObj, quantidade=qntServ)
+                    serVlrTotal = decimal.Decimal(servObj.valor) * int(qntServ)
+                    servItemObj = produtoItemModel(produto=servObj, quantidade=qntServ, total=serVlrTotal)
                     servItemObj.save()
-                if prodItemObj:
-                    orcamentoObjPost.produtoItem.add(prodItemObj)
-                if servItemObj:
                     orcamentoObjPost.produtoItem.add(servItemObj)
+                    orcamentoObjPost.total = orcamentoObjPost.total + servItemObj.total 
                 orcamentoObjPost.save()
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
@@ -425,6 +429,7 @@ def orcamentosBusca(request):
         if request.user.last_name == "GERENCIA":
             now = datetime.datetime.now()
             now = now.hour
+            clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
             produtosAtivos = produtoModel.objects.filter(estado=1, prodserv=1).all().order_by('nome')
             servicosAtivos = produtoModel.objects.filter(estado=1, prodserv=2).all().order_by('nome')
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
@@ -434,9 +439,22 @@ def orcamentosBusca(request):
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
             elif now >= 18 and now < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'GET' and request.GET.get('orcamentoID') != None:
+                orcamentoID = request.GET.get('orcamentoID')
+                orcamentoObj = orcamentoModel.objects.filter(id=orcamentoID).get()
+                return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'orcamentoObj':orcamentoObj})
+            if request.method == 'GET' and request.GET.get('clienteID') != None:
+                clienteID = request.GET.get('clienteID')
+                orcamentosAll = orcamentoModel.objects.filter(cliente__id=clienteID).all().order_by('dataCadastro')
+                return render (request, 'gerencia/orcamento/orcamentoSelectVisualizar.html', {'title':'Visualizar Orçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'orcamentosAll':orcamentosAll})
                 
             return render (request, 'gerencia/orcamento/orcamentoBusca.html', {'title':'Buscar Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
+                                                            'clientesAtivos':clientesAtivos,
                                                             'produtosAtivos':produtosAtivos,
                                                             'servicosAtivos':servicosAtivos})
         return render (request, 'site/login.html', {'title':'Login'})
@@ -454,12 +472,12 @@ def orcamentosVisualizar(request):
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
             elif now >= 18 and now < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
-            if request.method == 'POST' and request.POST.get('produtoID') != None:
-                produtoID = request.POST.get('produtoID')
-                produtoObj = produtoModel.objects.filter(id=produtoID).get()
+            if request.method == 'GET' and request.GET.get('orcamentoID') != None:
+                orcamentoID = request.GET.get('orcamentoID')
+                orcamentoObj = orcamentoModel.objects.filter(id=orcamentoID).get()
                 return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
                                                                 'msgTelaInicial':msgTelaInicial,
-                                                                'produtoObj':produtoObj})
+                                                                'orcamentoObj':orcamentoObj})
             return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial})
         return render (request, 'site/login.html', {'title':'Login'})
@@ -505,5 +523,40 @@ def orcamentosEditar(request):
                                                                 'msgTelaInicial':msgTelaInicial,
                                                                 'produtoObj':produtoObj,
                                                                 'msgConfirmacao':msgConfirmacao})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+
+def orcamentosExcluirItem(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            today = now
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'POST' and request.POST.get('prodItemIDNovo') != None and request.POST.get('orcamentoID') != None:
+                orcamentoID = request.POST.get('orcamentoID')
+                orcamentoObj = orcamentoModel.objects.filter(id=orcamentoID).get()
+                prodItemID = request.POST.get('prodItemIDNovo')
+                prodItemObj = produtoItemModel.objects.filter(id=prodItemID).get()
+                orcamentoObj.produtoItem.remove(prodItemObj)
+                orcamentoObj.total = orcamentoObj.total - decimal.Decimal(prodItemObj.total) 
+                orcamentoObj.save()
+                produtosAtivos = produtoModel.objects.filter(prodserv=1).all().order_by('nome')
+                servicosAtivos = produtoModel.objects.filter(prodserv=2).all().order_by('nome')
+                return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo/Editar Orçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today,
+                                                            'orcamentoObj':orcamentoObj,
+                                                            'produtosAtivos':produtosAtivos,
+                                                            'servicosAtivos':servicosAtivos})
+            
+            return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
+                                                            'msgTelaInicial':msgTelaInicial})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})

@@ -49,7 +49,7 @@ class produtoModel(models.Model):
     unidade = models.CharField(max_length=1, choices=PS, default=1)
     nome = models.CharField(max_length=200)
     observacao = models.CharField(max_length=200, null=True, blank=True)
-    valor = models.CharField(max_length=15, null=True, blank=True)
+    valor = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     dataCadastro = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -60,7 +60,7 @@ class produtoItemModel(models.Model):
     id = models.AutoField(primary_key=True)
     produto = models.ForeignKey(produtoModel, on_delete=models.CASCADE)
     quantidade = models.CharField(max_length=15, default=1)
-    total = models.CharField(max_length=15, null=True, blank=True)
+    total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     data_cadastro = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -72,6 +72,7 @@ class orcamentoModel(models.Model):
         ('1', 'Aberto'),
         ('2', 'Finalizado'),
         ('3', 'Cancelado'),
+        ('4', 'Descartado'),
     )
     id = models.AutoField(primary_key=True)
     estado = models.CharField(max_length=1, choices=ES, default=1)

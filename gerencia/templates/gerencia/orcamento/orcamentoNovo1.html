@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
         <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}" alt=""><br>
-        <span>Novo Orçamento</span>
+        <span>Novo/Editar Orçamento</span>
     </div>
 </div>
 <form action="/gerencia/orcamentosNovo/" method="POST">
@@ -59,8 +59,21 @@
             <label>Qnt.</label>
             <input type="number" name="qntServ" step="0.1" class="form-control" maxlength="5" placeholder="0">
         </div>
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <div class="float-right">
+                <input class="btn btn-outline-success " type="submit" value="Adicinar Itens" />&nbsp;&nbsp;&nbsp;
+                {% if orcamentoObj %}
+                    <button class="btn btn-outline-success " type="submit" formmethod="GET" formaction="/gerencia/orcamentosVisualizar">Finalizar</button>
+                {% endif %}
+            </div>
+            <div class="cancelarOrc">
+                <input class="btn btn-outline-secondary float-left"  type="submit" value="Cancelar" formmethod="GET" formaction="/gerencia/orcamentosHome/" />
+            </div>
+        </div>
         {% if orcamentoObj %}
         <div class="form-group col-sm-12 col-md-12">
+            <br>
             <table class="table">
                 <thead>
                     <tr class="cabecalhoTable">
@@ -74,45 +87,25 @@
                 </thead>
                 <tbody>
                     {% if orcamentoObj.produtoItem %}
-                    {% for produtoItemModel in orcamentoObj.produtoItem.all %}
-                    <tr>
-                        <th scope="row">{{produtoItemModel.produto.id}}</th>
-                        <td>{{produtoItemModel.produto.nome}}</td>
-                        <td>R$ {{produtoItemModel.produto.valor}}</td>
-                        <td>{{produtoItemModel.quantidade}}</td>
-                        <td class="text-right">Produto</td>
-                        <td><button class="btn btn-outline-danger " type="submit" value="">X</button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    {% endif %}
-                    {% if orcamentoObj.produtoItem.produto.prodserv == 2 %}
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Servico</td>
-                        <td>Servico</td>
-                        <td class="text-right">Servico</td>
-                        <td><button class="btn btn-outline-danger " type="submit" value="">X</button>
-                        </td>
-                    </tr>
+                        {% for produtoItemModel in orcamentoObj.produtoItem.all %}
+                            <tr>
+                                <th scope="row">{{produtoItemModel.produto.id}}</th>
+                                <td>{{produtoItemModel.produto.nome}}</td>
+                                <td>R$ {{produtoItemModel.produto.valor|floatformat:2}}</td>
+                                <td>{{produtoItemModel.quantidade}}</td>
+                                <td >R$ {{produtoItemModel.total|floatformat:2}}</td>
+                                <td><button class="btn btn-outline-danger " type="submit" name="prodItemIDNovo" formaction="/gerencia/orcamentosExcluirItem/" value="{{produtoItemModel.id}}">X</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
                     {% endif %}
                 </tbody>
             </table>
         </div>
         <div class="form-group col-sm-12 col-md-12">
-            <label class="totalOrc float-right">Total: R$ {{orcamentoObj.total}}</label>
+            <label class="totalOrc float-right">Total: R$ {{orcamentoObj.total|floatformat:2}}</label>
         </div>
         {% endif %}
-        <div class="col-sm-12 col-md-12">
-            <br>
-            <div class="float-right">
-                <input class="btn btn-outline-success " type="submit" value="Adicinar Itens" />&nbsp;&nbsp;&nbsp;
-                <input class="btn btn-outline-success " type="submit" value="Finalizar" />
-            </div>
-            <div class="cancelarOrc">
-                <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Cancelar</button>
-            </div>
-        </div>
     </div>
 </form>
 {% endblock %}

@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'orcamentosBusca/', views.orcamentosBusca),
     url(r'orcamentosVisualizar/', views.orcamentosVisualizar),
     url(r'orcamentosEditar/', views.orcamentosEditar),
+    url(r'orcamentosExcluirItem/', views.orcamentosExcluirItem),
 ]

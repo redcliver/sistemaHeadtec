@@ -2,51 +2,64 @@
 {% block body %}
 {% load static %}
 {% if msgConfirmacao %}
-    <script>alert('{{msgConfirmacao}}')</script>
+<script>alert('{{msgConfirmacao}}')</script>
 {% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
-        <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}"alt=""><br>
-        <span>Visualizar Cliente</span>
+        <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}" alt=""><br>
+        <span>Visualizar Orçamento</span>
     </div>
 </div>
-<form action="/gerencia/clientesEditar/">
-    <input type="hidden" name="clienteID" value="{{clienteObj.id}}"/>
+<form action="/gerencia/orcamentosNovo/" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="orcamentoID" value="{{orcamentoObj.id}}" />
     <div class="form-row">
-        <div class="col-sm-12 col-md-12">
+        <div class="form-group col-sm-12 col-md-12">
             <br>
-            <label >Nome Completo</label>
-            <input type="text" name="nome" class="form-control" maxlength="300" placeholder="Nome" value="{{clienteObj.nome}}" disabled>
-        </div>
-        <div class="col-sm-12 col-md-3">
-            <label >Telefone</label>
-            <input type="text" class="form-control" name="telefone" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Telefone" value="{{clienteObj.telefone}}" disabled>
-        </div>
-        <div class="col-sm-12 col-md-3">
-            <label >CNPJ</label>
-            <input type="text" class="form-control" name="cnpj" maxlength="14" onkeydown="javascript: fMasc( this, mCNPJ );" placeholder="CNPJ" value="{{clienteObj.cnpj}}" disabled>
-        </div>
-        <div class="col-sm-12 col-md-3">
-            <label >CPF</label>
-            <input type="text" class="form-control" name="cpf" maxlength="13" onkeydown="javascript: fMasc( this, mCPF );" placeholder="CPF" value="{{clienteObj.cpf}}" disabled>
-        </div>
-        <div class="col-sm-12 col-md-3">
-            <label >Data de Nasc.</label>
-            <input type="text" name="dataNascimento" class="form-control" value="{{clienteObj.dataNascimento|date:"d/m/Y"}}" disabled>
-        </div>
-        <div class="col-sm-12 col-md-3">
-            <label >Celular</label>
-            <input type="text" class="form-control" name="celular" maxlength="14" onkeydown="javascript: fMasc( this, mTel );" placeholder="Celular" value="{{clienteObj.celular}}" disabled>
-        </div>
-        <div class="col-sm-12 col-md-9">
-            <label >E-mail</label>
-            <input type="email" name="email" maxlength="300" class="form-control" placeholder="E-mail" value="{{clienteObj.email}}" disabled>
+            <label>Cliente</label>
+            <input type="text" name="nome" value="{{orcamentoObj.cliente.nome}}" class="form-control" maxlength="300"
+                placeholder="Nome Completo" disabled>
         </div>
         <div class="col-sm-12 col-md-12">
             <br>
-            <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>
-            <input class="btn btn-outline-success float-right"  type="submit" value="Editar" />
+            <div class="float-right">
+                <input class="btn btn-outline-success " type="submit" value="Adicinar Itens" />&nbsp;&nbsp;&nbsp;
+                <input class="btn btn-outline-success " type="submit" formaction="/gerencia/orcamentosHome/" value="Início" />
+            </div>
         </div>
+        {% if orcamentoObj %}
+        <div class="form-group col-sm-12 col-md-12">
+            <br>
+            <table class="table">
+                <thead>
+                    <tr class="cabecalhoTable">
+                        <th width="5%" scope="col">#</th>
+                        <th width="60%" scope="col">Itens</th>
+                        <th width="10%" scope="col">Valor Un.</th>
+                        <th width="10%" scope="col">Qnt.</th>
+                        <th width="10%" scope="col" class="text-right">Valor Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if orcamentoObj.produtoItem %}
+                        {% for produtoItemModel in orcamentoObj.produtoItem.all %}
+                            <tr>
+                                <th scope="row">{{produtoItemModel.produto.id}}</th>
+                                <td>{{produtoItemModel.produto.nome}}</td>
+                                <td>R$ {{produtoItemModel.produto.valor|floatformat:2}}</td>
+                                <td>{{produtoItemModel.quantidade}}</td>
+                                <td >R$ {{produtoItemModel.total|floatformat:2}}</td>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group col-sm-12 col-md-12">
+            <label class="totalOrc float-right">Total: R$ {{orcamentoObj.total|floatformat:2}}</label>
+        </div>
+        {% endif %}
     </div>
 </form>
 {% endblock %}
