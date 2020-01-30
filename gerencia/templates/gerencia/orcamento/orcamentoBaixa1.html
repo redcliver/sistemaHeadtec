@@ -1,0 +1,121 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+{% if msgConfirmacao %}
+<script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 float-left">
+    <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}" alt=""><br>
+    <span>Baixa Orçamento</span>
+  </div>
+</div>
+<form action="/gerencia/orcamentosBaixa/" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="orcamentoID" value="{{orcamentoObj.id}}" />
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-4">
+      <br>
+      <label>Nro. Orçamento</label>
+      <input type="text" name="nome" value="{{orcamentoObj.id}}" class="form-control" maxlength="300"
+        placeholder="Nro. Orçamento" disabled>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <br>
+      <label>Estado</label>
+      <input type="text" name="nome" value="{{orcamentoObj.get_estado_display}}" class="form-control" maxlength="300"
+        placeholder="Estado" disabled>
+    </div>
+    <div class="form-group col-sm-12 col-md-12">
+      <br>
+      <label>Cliente</label>
+      <input type="text" name="nome" value="{{orcamentoObj.cliente.nome}}" class="form-control" maxlength="300"
+        placeholder="Nome Completo" disabled>
+    </div>
+    {% if orcamentoObj %}
+    <div class="form-group col-sm-12 col-md-12">
+      <br>
+      <table class="table">
+        <thead>
+          <tr class="cabecalhoTable">
+            <th width="5%" scope="col">#</th>
+            <th width="60%" scope="col">Itens</th>
+            <th width="10%" scope="col">Valor Un.</th>
+            <th width="10%" scope="col">Qnt.</th>
+            <th width="10%" scope="col" class="text-right">Valor Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if orcamentoObj.produtoItem %}
+          {% for produtoItemModel in orcamentoObj.produtoItem.all %}
+          <tr>
+            <th scope="row">{{produtoItemModel.produto.id}}</th>
+            <td>{{produtoItemModel.produto.nome}}</td>
+            <td>R$ {{produtoItemModel.produto.valor|floatformat:2}}</td>
+            <td>{{produtoItemModel.quantidade}}</td>
+            <td>R$ {{produtoItemModel.total|floatformat:2}}</td>
+            </td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <div class="form-group col-sm-12 col-md-12">
+      <label class="totalOrc float-right">Total: R$ {{orcamentoObj.total|floatformat:2}}</label>
+    </div>
+    {% endif %}
+    <div class="col-sm-12 col-md-12">
+      <br>
+      <div class="float-left">
+        <button type="button" class="btn btn-outline-secondary float-right" onclick="goBack()">Voltar</button>
+      </div>
+      <div class="float-right">
+        <button type="button" class="btn btn-outline-success" data-toggle="modal"
+          data-target="#exampleModal1">Baixar</button>
+      </div>
+    </div>
+  </div>
+</form>
+<form method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="orcamentoID" value="{{orcamentoObj.id}}" />
+  <!-- Modal DESCONTO-->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content" style="min-width: 100%; padding: 10px;">
+        <div class="modal-header" style="margin-bottom: auto;">
+          <h2 class="modal-title align-middle" id="exampleModalLabel">Baixar Orçamento</h2>
+          <button type="button" style="max-height: 50px;" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="padding: 0px;">
+          {% if orcamentoObj %}
+          <br />
+          <div class="form-group col-sm-12 col-md-12">
+            <h3 class="cabecalhoTable " style="font-size: 30px;"><b>Total: R$ {{orcamentoObj.total}}</b></h3>
+            <hr />
+          </div>
+          {% endif %}
+          <div class="form-group col-sm-12 col-md-6">
+            <label for="inputName">Valor do Desconto<strong>*</strong></label>
+            <input type="text" class="form-control" name="desconto" value="0" step="0.01" maxlength="10"
+              onkeydown="javascript: fMasc( this, mValor );" required>
+          </div>
+        </div>
+        <div class="modal-footer" style="padding: 0px;">
+          <div class="form-group col-sm-12 col-md-12">
+            <br />
+            <button type="button" class="btn btn-outline-secondary float-left" data-dismiss="modal"
+              aria-label="Close">Cancelar</button>
+            <button type="submit" class="btn btn-outline-success float-right"
+              formaction="/lavajato_agenda/desconto">Baixar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}

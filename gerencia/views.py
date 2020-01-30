@@ -424,6 +424,43 @@ def orcamentosNovo(request):
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 
+
+def orcamentosBaixa(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
+            produtosAtivos = produtoModel.objects.filter(estado=1, prodserv=1).all().order_by('nome')
+            servicosAtivos = produtoModel.objects.filter(estado=1, prodserv=2).all().order_by('nome')
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'GET' and request.GET.get('orcamentoID') != None and request.GET.get('clienteID') == None:
+                orcamentoID = request.GET.get('orcamentoID')
+                orcamentoObj = orcamentoModel.objects.filter(id=orcamentoID).get()
+                return render (request, 'gerencia/orcamento/orcamentoBaixa1.html', {'title':'Baixa Orçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'orcamentoObj':orcamentoObj})
+            if request.method == 'GET' and request.GET.get('clienteID') != None:
+                clienteID = request.GET.get('clienteID')
+                orcamentosAll = orcamentoModel.objects.filter(cliente__id=clienteID).all().order_by('-dataCadastro')
+                return render (request, 'gerencia/orcamento/orcamentoSelectVisualizarBaixa.html', {'title':'Baixa Orçamento', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'orcamentosAll':orcamentosAll})
+                
+            return render (request, 'gerencia/orcamento/orcamentosBaixa.html', {'title':'Baixa Orçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'clientesAtivos':clientesAtivos,
+                                                            'produtosAtivos':produtosAtivos,
+                                                            'servicosAtivos':servicosAtivos})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+
 def orcamentosBusca(request):
     if request.user.is_authenticated:
         if request.user.last_name == "GERENCIA":

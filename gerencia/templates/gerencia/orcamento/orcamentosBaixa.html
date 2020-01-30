@@ -1,0 +1,30 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+<form action="/gerencia/orcamentosBaixa/" method="GET">
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-12 float-left">
+      <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}" alt="" /><br>
+      <span>Baixa Orçamento</span>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <label>Nro. Orçamento</label>
+      <input type="text" name="orcamentoID" class="form-control" maxlength="20" placeholder="Nro. Orçamento" autofocus>
+    </div>
+    <div class="form-group col-sm-12 col-md-12">
+      <label>Cliente</label>
+      <select name="clienteID" class="form-control">
+        <option disabled selected> -- Clientes -- </option>
+        {% for clienteModel in clientesAtivos %}
+        <option value={{clienteModel.id}}>{{clienteModel.nome}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-group col-sm-12 col-md-12">
+      <br>
+      <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>
+      <input class="btn btn-outline-success float-right" type="submit" value="Buscar" />
+    </div>
+  </div>
+</form>
+{% endblock %}
