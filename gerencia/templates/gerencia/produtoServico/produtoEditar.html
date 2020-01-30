@@ -2,11 +2,11 @@
 {% block body %}
 {% load static %}
 {% if msgConfirmacao %}
-    <script>alert('{{msgConfirmacao}}')</script>
+<script>alert('{{msgConfirmacao}}')</script>
 {% endif %}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 float-left">
-        <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}"alt=""><br>
+        <img class="iconesMenores " src="{% static '/ico/visualizar.svg' %}" alt=""><br>
         <span>Editar Produto/Serviço</span>
     </div>
 </div>
@@ -16,99 +16,102 @@
     <div class="form-row">
         <div class="col-sm-12 col-md-12">
             <br>
-            <label >Nome</label>
-            <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" value="{{produtoObj.nome}}" required autofocus>
+            <label>Nome</label>
+            <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome"
+                value="{{produtoObj.nome}}" required autofocus>
         </div>
         {% if produtoObj.unidade == '1' %}
         <div class="col-sm-12 col-md-3">
-            <label >Un. Padrão</label>
-            <select name="unidade" class="form-control" >
-                <option value="1" selected >N/A</option>
-                <option value="2" >Metro</option>
-                <option value="3" >Unidade</option>
-                <option value="4" >Hora</option>
-                <option value="5" >Dia</option>
-            </select>           
+            <label>Un. Padrão</label>
+            <select name="unidade" class="form-control">
+                <option value="1" selected>N/A</option>
+                <option value="2">Metro</option>
+                <option value="3">Unidade</option>
+                <option value="4">Hora</option>
+                <option value="5">Dia</option>
+            </select>
         </div>
         {% endif %}
         {% if produtoObj.unidade == '2' %}
         <div class="col-sm-12 col-md-3">
-            <label >Un. Padrão</label>
-            <select name="unidade" class="form-control" >
-                <option value="1"  >N/A</option>
+            <label>Un. Padrão</label>
+            <select name="unidade" class="form-control">
+                <option value="1">N/A</option>
                 <option value="2" selected>Metro</option>
-                <option value="3" >Unidade</option>
-                <option value="4" >Hora</option>
-                <option value="5" >Dia</option>
-            </select>           
+                <option value="3">Unidade</option>
+                <option value="4">Hora</option>
+                <option value="5">Dia</option>
+            </select>
         </div>
         {% endif %}
         {% if produtoObj.unidade == '3' %}
         <div class="col-sm-12 col-md-3">
-            <label >Un. Padrão</label>
-            <select name="unidade" class="form-control" >
-                <option value="1"  >N/A</option>
-                <option value="2" >Metro</option>
+            <label>Un. Padrão</label>
+            <select name="unidade" class="form-control">
+                <option value="1">N/A</option>
+                <option value="2">Metro</option>
                 <option value="3" selected>Unidade</option>
-                <option value="4" >Hora</option>
-                <option value="5" >Dia</option>
-            </select>           
+                <option value="4">Hora</option>
+                <option value="5">Dia</option>
+            </select>
         </div>
         {% endif %}
         {% if produtoObj.unidade == '4' %}
         <div class="col-sm-12 col-md-3">
-            <label >Un. Padrão</label>
-            <select name="unidade" class="form-control" >
-                <option value="1"  >N/A</option>
-                <option value="2" >Metro</option>
-                <option value="3" >Unidade</option>
+            <label>Un. Padrão</label>
+            <select name="unidade" class="form-control">
+                <option value="1">N/A</option>
+                <option value="2">Metro</option>
+                <option value="3">Unidade</option>
                 <option value="4" selected>Hora</option>
-                <option value="5" >Dia</option>
-            </select>           
+                <option value="5">Dia</option>
+            </select>
         </div>
         {% endif %}
         {% if produtoObj.unidade == '5' %}
         <div class="col-sm-12 col-md-3">
-            <label >Un. Padrão</label>
-            <select name="unidade" class="form-control" >
-                <option value="1"  >N/A</option>
-                <option value="2" >Metro</option>
-                <option value="3" >Unidade</option>
-                <option value="4" >Hora</option>
+            <label>Un. Padrão</label>
+            <select name="unidade" class="form-control">
+                <option value="1">N/A</option>
+                <option value="2">Metro</option>
+                <option value="3">Unidade</option>
+                <option value="4">Hora</option>
                 <option value="5" selected>Dia</option>
-            </select>           
+            </select>
         </div>
         {% endif %}
         <div class="col-sm-12 col-md-3">
-            <label >Valor</label>
-            <input type="number" name="valor" class="form-control" step='0.01' maxlength="10" value="{{produtoObj.valor}}" required><br>
+            <label>Valor</label>
+            <input type="text" class="form-control" name="valor" value="{{produtoObj.valor|floatformat:2}}" step="0.01"
+                maxlength="10" onkeydown="javascript: fMasc( this, mValor );">
         </div>
         {% if produtoObj.prodserv == '1' %}
         <div class="col-sm-12 col-md-3">
-            <label >Produto/Serviço</label>
+            <label>Produto/Serviço</label>
             <select name="prodserv" class="form-control" required>
-                <option value="1" selected >Produto</option>
-                <option value="2" >Serviço</option>
-            </select>           
+                <option value="1" selected>Produto</option>
+                <option value="2">Serviço</option>
+            </select>
         </div>
         {% endif %}
         {% if produtoObj.prodserv == '2' %}
         <div class="col-sm-12 col-md-3">
-            <label >Produto/Serviço</label>
+            <label>Produto/Serviço</label>
             <select name="prodserv" class="form-control" required>
-                <option value="1"  >Produto</option>
+                <option value="1">Produto</option>
                 <option value="2" selected>Serviço</option>
-            </select>           
+            </select>
         </div>
         {% endif %}
         <div class="col-sm-12 col-md-3">
-            <label >Obs.</label>
-            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao" value="{{produtoObj.observacao}}">
+            <label>Obs.</label>
+            <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao"
+                value="{{produtoObj.observacao}}">
         </div>
         <div class="col-sm-12 col-md-12">
             <br>
             <button type="button" class="btn btn-outline-secondary" onclick="goBack()">Voltar</button>
-            <input class="btn btn-outline-success float-right"  type="submit" value="Salvar" />
+            <input class="btn btn-outline-success float-right" type="submit" value="Salvar" />
         </div>
     </div>
 </form>

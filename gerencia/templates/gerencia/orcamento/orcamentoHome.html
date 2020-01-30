@@ -1,6 +1,9 @@
 {% extends 'base_gerencia.html' %}
 {% block body %}
 {% load static %}
+{% if msgConfirmacao %}
+<script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
 <div class="row">
     <div class="col-6 col-sm-6 col-md-2 gerencia">
         <a href="/gerencia/orcamentosNovo" class="gerenciaText">

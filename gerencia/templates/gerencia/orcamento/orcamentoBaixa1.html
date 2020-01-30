@@ -77,7 +77,7 @@
     </div>
   </div>
 </form>
-<form method="POST">
+<form method="POST" action="/gerencia/orcamentosBaixado/">
   {% csrf_token %}
   <input type="hidden" name="orcamentoID" value="{{orcamentoObj.id}}" />
   <!-- Modal DESCONTO-->
@@ -100,9 +100,16 @@
           </div>
           {% endif %}
           <div class="form-group col-sm-12 col-md-6">
-            <label for="inputName">Valor do Desconto<strong>*</strong></label>
-            <input type="text" class="form-control" name="desconto" value="0" step="0.01" maxlength="10"
-              onkeydown="javascript: fMasc( this, mValor );" required>
+            <label for="inputName">Valor do Desconto</label>
+            <input type="text" class="form-control" name="desconto" placeholder="R$0.00" step="0.01" maxlength="10"
+              onkeydown="javascript: fMasc( this, mValor );">
+          </div>
+          <div class="form-group col-sm-12 col-md-6">
+            <label>Método</label>
+            <select name="metodo" class="form-control">
+              <option value="1" selected>Dinheiro</option>
+              <option value="2">Cartão</option>
+            </select>
           </div>
         </div>
         <div class="modal-footer" style="padding: 0px;">
@@ -110,8 +117,7 @@
             <br />
             <button type="button" class="btn btn-outline-secondary float-left" data-dismiss="modal"
               aria-label="Close">Cancelar</button>
-            <button type="submit" class="btn btn-outline-success float-right"
-              formaction="/lavajato_agenda/desconto">Baixar</button>
+            <button type="submit" class="btn btn-outline-success float-right">Baixar</button>
           </div>
         </div>
       </div>

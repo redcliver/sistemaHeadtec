@@ -40,7 +40,7 @@
         <div class="form-group col-sm-8 col-md-4">
             <label>Produto</label>
             <select name="produtoID" class="form-control">
-                <option disabled selected> -- Produtos -- </option>
+                <option value="None" selected> -- Produtos -- </option>
                 {% for produtoModel in produtosAtivos %}
                 <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
                 {% endfor %}
@@ -55,7 +55,7 @@
         <div class="form-group col-sm-8 col-md-4">
             <label>Serviço</label>
             <select name="servicoID" class="form-control">
-                <option disabled selected> -- Serviços -- </option>
+                <option value="None" selected> -- Serviços -- </option>
                 {% for produtoModel in servicosAtivos %}
                 <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
                 {% endfor %}

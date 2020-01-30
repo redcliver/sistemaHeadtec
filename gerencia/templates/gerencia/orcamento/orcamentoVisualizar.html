@@ -23,7 +23,9 @@
         <div class="col-sm-12 col-md-12">
             <br>
             <div class="float-right">
+                {% if orcamentoObj.estado == 1 %}
                 <input class="btn btn-outline-success " type="submit" value="Adicinar Itens" />&nbsp;&nbsp;&nbsp;
+                {% endif %}
                 <input class="btn btn-outline-success " type="submit" formaction="/gerencia/orcamentosHome/"
                     value="Início" />
             </div>
@@ -56,6 +58,12 @@
                     {% endif %}
                 </tbody>
             </table>
+        </div>
+        <div class="form-group col-sm-12 col-md-12">
+            <label class="totalOrc float-right">Sub-total: R$ {{orcamentoObj.subtotal|floatformat:2}}</label>
+        </div>
+        <div class="form-group col-sm-12 col-md-12">
+            <label class="totalOrc float-right">Desconto: R$ {{orcamentoObj.desconto|floatformat:2}}</label>
         </div>
         <div class="form-group col-sm-12 col-md-12">
             <label class="totalOrc float-right">Total: R$ {{orcamentoObj.total|floatformat:2}}</label>

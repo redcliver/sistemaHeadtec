@@ -30,7 +30,8 @@
         </div>
         <div class="col-sm-12 col-md-3">
             <label>Valor</label>
-            <input type="number" name="valor" class="form-control" step='0.01' maxlength="10"><br>
+            <input type="text" class="form-control" name="valor" value="0" step="0.01" maxlength="10"
+                onkeydown="javascript: fMasc( this, mValor );">
         </div>
         <div class="col-sm-12 col-md-3">
             <label>Produto/Serviço</label>

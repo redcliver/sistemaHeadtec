@@ -74,12 +74,17 @@ class orcamentoModel(models.Model):
         ('3', 'Cancelado'),
         ('4', 'Descartado'),
     )
+    PG = (
+        ('1', 'Dinheiro'),
+        ('2', 'Cartão'),
+    )
     id = models.AutoField(primary_key=True)
     estado = models.CharField(max_length=1, choices=ES, default=1)
+    pagamento = models.CharField(max_length=1, choices=PG, null=True, blank=True)
     produtoItem = models.ManyToManyField(produtoItemModel)
     cliente = models.ForeignKey(clienteModel, on_delete=models.CASCADE)
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    desconto = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    desconto = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     obs = models.CharField(max_length=1000, null=True, blank=True)
     dataFechamento = models.DateTimeField(default=timezone.now)
@@ -87,3 +92,26 @@ class orcamentoModel(models.Model):
 
     def __str__(self):
         return self.cliente.nome
+
+
+class caixaModel(models.Model):
+    OP = (
+        ('1', 'Entrada'),
+        ('2', 'Saida'),
+    )
+    PG = (
+        ('1', 'Dinheiro'),
+        ('2', 'Cartao'),
+    )
+    id = models.AutoField(primary_key=True)
+    operacao = models.CharField(max_length=1, choices=OP, default=1)
+    total = models.DecimalField(max_digits=10, decimal_places=2)    
+    pagamento = models.CharField(max_length=1, choices=PG, null=True, blank=True)
+    referencia = models.CharField(max_length=12, null=True, blank=True)
+    descricao = models.CharField(max_length=200, null=True, blank=True)
+    desconto = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    valorOperacao = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    dataCadastro = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.str(id)
