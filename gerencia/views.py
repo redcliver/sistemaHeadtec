@@ -439,7 +439,7 @@ def orcamentosBusca(request):
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
             elif now >= 18 and now < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
-            if request.method == 'GET' and request.GET.get('orcamentoID') != None:
+            if request.method == 'GET' and request.GET.get('orcamentoID') != None and request.GET.get('clienteID') == None:
                 orcamentoID = request.GET.get('orcamentoID')
                 orcamentoObj = orcamentoModel.objects.filter(id=orcamentoID).get()
                 return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
@@ -447,7 +447,7 @@ def orcamentosBusca(request):
                                                                 'orcamentoObj':orcamentoObj})
             if request.method == 'GET' and request.GET.get('clienteID') != None:
                 clienteID = request.GET.get('clienteID')
-                orcamentosAll = orcamentoModel.objects.filter(cliente__id=clienteID).all().order_by('dataCadastro')
+                orcamentosAll = orcamentoModel.objects.filter(cliente__id=clienteID).all().order_by('-dataCadastro')
                 return render (request, 'gerencia/orcamento/orcamentoSelectVisualizar.html', {'title':'Visualizar Orçamento', 
                                                                 'msgTelaInicial':msgTelaInicial,
                                                                 'orcamentosAll':orcamentosAll})
@@ -475,7 +475,7 @@ def orcamentosVisualizar(request):
             if request.method == 'GET' and request.GET.get('orcamentoID') != None:
                 orcamentoID = request.GET.get('orcamentoID')
                 orcamentoObj = orcamentoModel.objects.filter(id=orcamentoID).get()
-                return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
+                return render (request, 'gerencia/orcamento/orcamentoVisualizarGeral.html', {'title':'Visualizar Orçamento', 
                                                                 'msgTelaInicial':msgTelaInicial,
                                                                 'orcamentoObj':orcamentoObj})
             return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 

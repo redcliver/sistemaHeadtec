@@ -1,0 +1,46 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+{% if msgConfirmacao %}
+<script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
+<div class="row">
+  <div class="col-12 col-sm-12 col-md-12 float-left">
+    <img class="iconesMenores " src="{% static '/ico/addGeneral.svg' %}" alt=""><br>
+    <span>Selecione o Orçamento</span>
+  </div>
+</div>
+<form>
+  <div class="form-group col-sm-12 col-md-12">
+    <br>
+    <table class="table">
+      <thead>
+        <tr class="cabecalhoTable">
+          <th width="5%" scope="col">#</th>
+          <th width="60%" scope="col">Cliente</th>
+          <th width="10%" scope="col">Data</th>
+          <th width="10%" scope="col">Total</th>
+          <th width="10%" scope="col" class="text-right">Visualizar</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for orcamentoModel in orcamentosAll %}
+        <tr>
+          <th scope="row">{{orcamentoModel.id}}</th>
+          <td>{{orcamentoModel.cliente.nome}}</td>
+          <td>{{orcamentoModel.dataCadastro|date:"d/m/Y"}}</td>
+          <td>R$ {{orcamentoModel.total|floatformat:2}}</td>
+          <td><button class="btn btn-outline-success" name="orcamentoID" value="{{orcamentoModel.id}}"
+              formaction="/gerencia/orcamentosVisualizar" formmethod="GET" type="submit">Visualizar</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="form-group col-sm-12 col-md-12">
+    <br>
+    <button type="button" class="btn btn-outline-secondary float-right" onclick="goBack()">Voltar</button>
+  </div>
+</form>
+{% endblock %}
