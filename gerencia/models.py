@@ -107,7 +107,7 @@ class caixaModel(models.Model):
     operacao = models.CharField(max_length=1, choices=OP, default=1)
     total = models.DecimalField(max_digits=10, decimal_places=2)    
     pagamento = models.CharField(max_length=1, choices=PG, null=True, blank=True)
-    referencia = models.CharField(max_length=12, null=True, blank=True)
+    referencia = models.CharField(max_length=200, null=True, blank=True)
     descricao = models.CharField(max_length=200, null=True, blank=True)
     desconto = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     valorOperacao = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)

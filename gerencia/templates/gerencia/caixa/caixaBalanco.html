@@ -1,0 +1,82 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+{% if msgConfirmacao %}
+<script>alert('{{msgConfirmacao}}')</script>
+{% endif %}
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 float-left">
+        <img class="iconesMenores " src="{% static '/ico/relatorios.svg' %}" alt=""><br>
+        <span>Balanço</span>
+    </div>
+</div>
+<form action="/gerencia/caixaBalanco/" method="POST">
+    {%csrf_token%}
+    <div class="form-row">
+        <div class="col-sm-12 col-md-12">
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <br />
+            <label>Início</label>
+            <input type="date" name="dataInicio" value="{{dataInicio|date:'Y-m-d'}}" class="form-control">
+        </div>
+        <div class="col-sm-12 col-md-2">
+            <br />
+            <label>Fim</label>
+            <input type="date" name="dataFim" value="{{dataFim|date:'Y-m-d'}}" class="form-control">
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <br />
+            <label>&nbsp;</label>
+            <input class="btn btn-outline-success" type="submit" value="Filtrar" />
+        </div> 
+        <div class="col-sm-12 col-md-5">
+            <div class="float-right">
+                <label class="totalOrc">Total em caixa: R$ {{caixaObj.total|floatformat:2}}</label>
+            </div>
+        </div>
+    </div>
+</form>
+<form action="/gerencia/caixaBalanco/" method="POST">
+    <div class="form-row">
+        <div class="form-group col-sm-12 col-md-12">
+            <br>
+            <label>Movimentações</label>
+            <table class="table">
+                <thead>
+                    <tr class="cabecalhoTable">
+                        <th width="5%" scope="col">#</th>
+                        <th width="10%" scope="col">Data</th>
+                        <th width="15%" scope="col">Operação</th>
+                        <th width="50%" scope="col">Descrição</th>
+                        <th width="10%" scope="col">Valor Op.</th>
+                        <th width="10%" scope="col" class="text-right">Total Caixa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for caixaModel in caixaAll %}
+                    <tr>
+                        <th scope="row">{{caixaModel.id}}</th>
+                        <td >{{caixaModel.dataCadastro|date:"d/m/Y"}}</td>
+                        <td>{{caixaModel.get_operacao_display}}</td>
+                        <td>{{caixaModel.descricao}}</td>
+                        {% if caixaModel.operacao == '1' %}
+                            <td style="color: darkgreen;">R$ {{caixaModel.valorOperacao|floatformat:2}}</td>
+                        {% endif %}
+                        {% if caixaModel.operacao == '2' %}
+                            <td style="color: darkred;">R$ -{{caixaModel.valorOperacao|floatformat:2}}</td>
+                        {% endif %}
+                        <td>R$ {{caixaModel.total|floatformat:2}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <input class="btn btn-outline-secondary float-left" type="submit" value="Voltar" formmethod="GET"
+            formaction="/gerencia/caixaHome/" />
+        </div>  
+    </div>  
+</form action="/gerencia/caixaBalanco/" method="POST">
+{% endblock %}

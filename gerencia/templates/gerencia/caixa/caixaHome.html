@@ -1,0 +1,26 @@
+{% extends 'base_gerencia.html' %}
+{% block body %}
+{% load static %}
+<div class="row">
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/caixaEntrada" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/entrada.svg' %}"alt=""><br />
+        Entrada</a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/caixaSaida" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/saida.svg' %}"alt=""><br />
+        Saída</a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/caixaBalanco" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/relatorios.svg' %}"alt=""><br />
+        Balanço</a>
+    </div>
+    <div class="col-6 col-sm-6 col-md-2 gerencia">
+        <a href="/gerencia/" class="gerenciaText">
+        <img class="icones " src="{% static '/ico/voltar.svg' %}"alt=""><br />
+        Voltar</a>
+    </div>
+</div>
+{% endblock %}

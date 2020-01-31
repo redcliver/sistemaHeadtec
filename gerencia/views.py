@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import datetime
+from datetime import timedelta
+from django.utils import timezone
 import decimal
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
@@ -469,13 +471,13 @@ def orcamentosBaixado(request):
     if request.user.is_authenticated:
         if request.user.last_name == "GERENCIA":
             now = datetime.datetime.now()
-            now = now.hour
+            hora = now.hour
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
-            if now >= 4 and now <= 11:
+            if hora >= 4 and hora <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
-            elif now > 11 and now < 18:
+            elif hora > 11 and hora < 18:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
-            elif now >= 18 and now < 4:
+            elif hora >= 18 and hora < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
             if request.method == 'POST' and request.POST.get('orcamentoID') != None:
                 orcamentoID = request.POST.get('orcamentoID')
@@ -487,6 +489,7 @@ def orcamentosBaixado(request):
                     orcamentoObj.desconto = desconto
                 orcamentoObj.metodo = metodo
                 orcamentoObj.estado = 2
+                orcamentoObj.dataFechamento = now
                 orcamentoObj.save()
                 try:
                     lastCaixa = caixaModel.objects.latest('id')
@@ -516,16 +519,16 @@ def orcamentosBusca(request):
     if request.user.is_authenticated:
         if request.user.last_name == "GERENCIA":
             now = datetime.datetime.now()
-            now = now.hour
+            hora = now.hour
             clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
             produtosAtivos = produtoModel.objects.filter(estado=1, prodserv=1).all().order_by('nome')
             servicosAtivos = produtoModel.objects.filter(estado=1, prodserv=2).all().order_by('nome')
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
-            if now >= 4 and now <= 11:
+            if hora >= 4 and hora <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
-            elif now > 11 and now < 18:
+            elif hora > 11 and hora < 18:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
-            elif now >= 18 and now < 4:
+            elif hora >= 18 and hora < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
             if request.method == 'GET' and request.GET.get('orcamentoID') != None and request.GET.get('clienteID') == None:
                 orcamentoID = request.GET.get('orcamentoID')
@@ -618,14 +621,14 @@ def orcamentosExcluirItem(request):
     if request.user.is_authenticated:
         if request.user.last_name == "GERENCIA":
             now = datetime.datetime.now()
-            now = now.hour
+            hora = now.hour
             today = now
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
-            if now >= 4 and now <= 11:
+            if hora >= 4 and hora <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
-            elif now > 11 and now < 18:
+            elif hora > 11 and hora < 18:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
-            elif now >= 18 and now < 4:
+            elif hora >= 18 and hora < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
             if request.method == 'POST' and request.POST.get('prodItemIDNovo') != None and request.POST.get('orcamentoID') != None:
                 orcamentoID = request.POST.get('orcamentoID')
@@ -647,5 +650,155 @@ def orcamentosExcluirItem(request):
             
             return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+    
+def caixaHome(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+                
+            return render (request, 'gerencia/caixa/caixaHome.html', {'title':'Caixa', 
+                                                            'msgTelaInicial':msgTelaInicial})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+    
+def caixaEntrada(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            hora = now.hour
+            mes = now.month
+            today = now
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if hora >= 4 and hora <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif hora > 11 and hora < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif hora >= 18 and hora < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            try:
+                lastCaixa = caixaModel.objects.latest('id')
+            except:
+                lastCaixa = caixaModel(total=0)
+                lastCaixa.save()
+            try:
+                lastCaixa = caixaModel.objects.latest('id')
+            except:
+                lastCaixa = caixaModel(total=0)
+                lastCaixa.save()
+            if request.method == 'POST' and request.POST.get('valorOperacao') != None:        
+                pagamento = request.POST.get('pagamento')     
+                descricao = request.POST.get('descricao')     
+                valorOperacao = request.POST.get('valorOperacao')
+                novoTotal = lastCaixa.total + decimal.Decimal(valorOperacao)
+                caixaNovo = caixaModel(operacao=1, total=novoTotal, pagamento=pagamento, referencia="Entrada", descricao=descricao, valorOperacao=valorOperacao)
+                caixaNovo.save()
+                msgConfirmacao = "Entrada efetuada com sucesso!"
+                caixaAll = caixaModel.objects.filter(dataCadastro__month=mes).all().order_by('-dataCadastro')
+                lastCaixa = caixaModel.objects.latest('id')
+                return render (request, 'gerencia/caixa/caixaBalanco.html', {'title':'Balanço', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'caixaObj':lastCaixa,
+                                                            'caixaAll':caixaAll,
+                                                            'msgConfirmacao':msgConfirmacao,
+                                                            'today':today})
+                
+            return render (request, 'gerencia/caixa/caixaEntrada.html', {'title':'Entrada', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'caixaObj':lastCaixa})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+    
+def caixaSaida(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            hora = now.hour
+            mes = now.month
+            today = now
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if hora >= 4 and hora <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif hora > 11 and hora < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif hora >= 18 and hora < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            try:
+                lastCaixa = caixaModel.objects.latest('id')
+            except:
+                lastCaixa = caixaModel(total=0)
+                lastCaixa.save()
+            if request.method == 'POST' and request.POST.get('valorOperacao') != None:        
+                pagamento = request.POST.get('pagamento')     
+                descricao = request.POST.get('descricao')     
+                valorOperacao = request.POST.get('valorOperacao')
+                novoTotal = lastCaixa.total - decimal.Decimal(valorOperacao)
+                caixaNovo = caixaModel(operacao=2, total=novoTotal, pagamento=pagamento, referencia="Retirada", descricao=descricao, valorOperacao=valorOperacao)
+                caixaNovo.save()
+                msgConfirmacao = "Retirada efetuada com sucesso!"
+                caixaAll = caixaModel.objects.filter(dataCadastro__month=mes).all().order_by('-dataCadastro')
+                lastCaixa = caixaModel.objects.latest('id')
+                return render (request, 'gerencia/caixa/caixaBalanco.html', {'title':'Balanço', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'caixaObj':lastCaixa,
+                                                            'caixaAll':caixaAll,
+                                                            'msgConfirmacao':msgConfirmacao,
+                                                            'today':today})
+
+            return render (request, 'gerencia/caixa/caixaSaida.html', {'title':'Saída', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'caixaObj':lastCaixa})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+    
+def caixaBalanco(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            mes = now.month
+            hora = now.hour
+            dataFim = now
+            dataInicio = now + timezone.timedelta(days=-30)
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            if hora >= 4 and hora <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif hora > 11 and hora < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif hora >= 18 and hora < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            try:
+                lastCaixa = caixaModel.objects.latest('id')
+            except:
+                lastCaixa = caixaModel(total=0)
+                lastCaixa.save()
+            caixaAll = caixaModel.objects.filter(dataCadastro__range=(dataInicio,dataFim)).all().order_by('-dataCadastro')
+            lastCaixa = caixaModel.objects.latest('id')
+            if request.method == 'POST' and request.POST.get('dataInicio') != None and request.POST.get('dataFim') != None:
+                dataInicio = request.POST.get('dataInicio')
+                dataFim = request.POST.get('dataFim')
+                caixaAll = caixaModel.objects.filter(dataCadastro__range=(dataInicio,dataFim)).all().order_by('-dataCadastro')
+                dataInicio = datetime.datetime.strptime(dataInicio, "%Y-%m-%d").date()
+                dataFim = datetime.datetime.strptime(dataFim, "%Y-%m-%d").date()
+                return render (request, 'gerencia/caixa/caixaBalanco.html', {'title':'Balanço', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'caixaObj':lastCaixa,
+                                                            'dataInicio':dataInicio,
+                                                            'dataFim':dataFim,
+                                                            'caixaAll':caixaAll})
+            return render (request, 'gerencia/caixa/caixaBalanco.html', {'title':'Balanço', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'caixaObj':lastCaixa,
+                                                            'dataInicio':dataInicio,
+                                                            'dataFim':dataFim,
+                                                            'caixaAll':caixaAll})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})

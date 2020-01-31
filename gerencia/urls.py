@@ -22,4 +22,8 @@ urlpatterns = [
     url(r'orcamentosVisualizar/', views.orcamentosVisualizar),
     url(r'orcamentosEditar/', views.orcamentosEditar),
     url(r'orcamentosExcluirItem/', views.orcamentosExcluirItem),
+    url(r'caixaHome/', views.caixaHome),
+    url(r'caixaEntrada/', views.caixaEntrada),
+    url(r'caixaSaida/', views.caixaSaida),
+    url(r'caixaBalanco/', views.caixaBalanco),
 ]
