@@ -13,8 +13,23 @@
 <form action="/gerencia/produtosNovo/" method="POST">
     {% csrf_token %}
     <div class="form-row">
-        <div class="col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-3">
             <br>
+            <label>Categoria</label>
+            <select name="subProduto" class="form-control">
+                <option disabled selected>-- Categorias --</option>
+                {% for subProduto in subProdutosAtivos %}
+                <option value="{{subProduto.id}}">{{subProduto.nome}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <br>
+            <label>&nbsp;</label>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal1">Nova
+                Categoria</button>
+        </div>
+        <div class="col-sm-12 col-md-12">
             <label>Nome</label>
             <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome" autofocus>
         </div>
@@ -34,13 +49,6 @@
                 onkeydown="javascript: fMasc( this, mValor );">
         </div>
         <div class="col-sm-12 col-md-3">
-            <label>Produto/Serviço</label>
-            <select name="prodserv" class="form-control">
-                <option value="1" selected>Produto</option>
-                <option value="2">Serviço</option>
-            </select>
-        </div>
-        <div class="col-sm-12 col-md-3">
             <label>Obs.</label>
             <input type="text" name="observacao" class="form-control" maxlength="200" placeholder="Observaçao">
         </div>
@@ -50,6 +58,39 @@
             <input class="btn btn-outline-secondary float-left" type="submit" value="Voltar" formmethod="GET"
                 formaction="/gerencia/produtosHome" />
             <input class="btn btn-outline-success float-right" type="submit" value="Cadastrar" />
+        </div>
+    </div>
+</form>
+<form method="POST" action="/gerencia/subProdutosNovo/">
+    {% csrf_token %}
+    <!-- Modal DESCONTO-->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="min-width: 100%; padding: 10px;">
+                <div class="modal-header" style="margin-bottom: auto;">
+                    <h2 class="modal-title align-middle" id="exampleModalLabel">Nova Categoria</h2>
+                    <button type="button" style="max-height: 50px;" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 15px;">
+                    <div class="col-sm-12 col-md-12">
+                        <label>Nome</label>
+                        <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome"
+                            autofocus>
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding: 0px;">
+                    <div class="form-group col-sm-12 col-md-12">
+                        <br />
+                        <button type="button" class="btn btn-outline-secondary float-left" data-dismiss="modal"
+                            aria-label="Close">Cancelar</button>
+                        <button type="submit" class="btn btn-outline-success float-right">Salvar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

@@ -5,7 +5,7 @@ from django.utils import timezone
 import decimal
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
-from .models import clienteModel, produtoModel, orcamentoModel, produtoItemModel, caixaModel
+from .models import clienteModel, subProdutoModel, produtoModel, orcamentoModel, produtoItemModel, caixaModel
 from django.http import HttpResponse
 
 # Create your views here.
@@ -194,13 +194,14 @@ def produtosHome(request):
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
     
-def produtosNovo(request):
+def subProdutosNovo(request):
     if request.user.is_authenticated:
         if request.user.last_name == "GERENCIA":
             now = datetime.datetime.now()
             now = now.hour
             today = now
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
             if now >= 4 and now <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
             elif now > 11 and now < 18:
@@ -209,20 +210,55 @@ def produtosNovo(request):
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
             if request.method == 'POST' and request.POST.get('nome') != None:
                 nome = request.POST.get('nome')
+                newSubProduto = subProdutoModel(nome=nome)
+                newSubProduto.save()
+                msgConfirmacao = "Categoria cadastrada com sucesso!"
+                return render (request, 'gerencia/produtoServico/produtoNovo.html', {'title':'Novo Produto/Servico', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today,
+                                                            'msgConfirmacao':msgConfirmacao,
+                                                            'subProdutosAtivos':subProdutosAtivos})
+            return render (request, 'gerencia/produtoServico/produtoNovo.html', {'title':'Novo Produto/Servico', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today,
+                                                            'subProdutosAtivos':subProdutosAtivos})
+        return render (request, 'site/login.html', {'title':'Login'})
+    return render (request, 'site/login.html', {'title':'Login'})
+
+def produtosNovo(request):
+    if request.user.is_authenticated:
+        if request.user.last_name == "GERENCIA":
+            now = datetime.datetime.now()
+            now = now.hour
+            today = now
+            msgTelaInicial = "Olá, " + request.user.get_short_name() 
+            subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
+            if now >= 4 and now <= 11:
+                msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
+            elif now > 11 and now < 18:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
+            elif now >= 18 and now < 4:
+                msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'POST' and request.POST.get('nome') != None:
+                subProduto = request.POST.get('subProduto')
+                nome = request.POST.get('nome')
                 unidade = request.POST.get('unidade')
                 valor = request.POST.get('valor')
                 prodserv = request.POST.get('prodserv')
                 observacao = request.POST.get('observacao')
-                newProduto = produtoModel(nome=nome, unidade=unidade, valor=valor, prodserv=prodserv, observacao=observacao)
+                subProdutoObj = subProdutoModel.objects.filter(id=subProduto).get()
+                newProduto = produtoModel(subProduto=subProdutoObj, nome=nome, unidade=unidade, valor=valor, observacao=observacao)
                 newProduto.save()
                 msgConfirmacao = "Produto/Serviço cadastrado com sucesso!"
                 return render (request, 'gerencia/produtoServico/produtoNovo.html', {'title':'Novo Produto/Servico', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
-                                                            'msgConfirmacao':msgConfirmacao})
+                                                            'msgConfirmacao':msgConfirmacao,
+                                                            'subProdutosAtivos':subProdutosAtivos})
             return render (request, 'gerencia/produtoServico/produtoNovo.html', {'title':'Novo Produto/Servico', 
                                                             'msgTelaInicial':msgTelaInicial,
-                                                            'today':today})
+                                                            'today':today,
+                                                            'subProdutosAtivos':subProdutosAtivos})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 
@@ -231,8 +267,8 @@ def produtosBusca(request):
         if request.user.last_name == "GERENCIA":
             now = datetime.datetime.now()
             now = now.hour
-            produtosAtivos = produtoModel.objects.filter(estado=1, prodserv=1).all().order_by('nome')
-            servicosAtivos = produtoModel.objects.filter(estado=1, prodserv=2).all().order_by('nome')
+            produtosAtivos = produtoModel.objects.filter(estado=1).all().order_by('nome')
+            subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
             if now >= 4 and now <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
@@ -240,11 +276,20 @@ def produtosBusca(request):
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
             elif now >= 18 and now < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
+            if request.method == 'POST' and request.POST.get('subProdutoID') != None:
+                subProdutoID = request.POST.get('subProdutoID')
+                subProdutoObj = subProdutoModel.objects.filter(id=subProdutoID).get()
+
+                return render (request, 'gerencia/produtoServico/produtoBusca.html', {'title':'Buscar Produto/Serviço', 
+                                                                'msgTelaInicial':msgTelaInicial,
+                                                                'produtosAtivos':produtosAtivos,
+                                                                'subProdutoObj':subProdutoObj})
+            
                 
             return render (request, 'gerencia/produtoServico/produtoBusca.html', {'title':'Buscar Produto/Serviço', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'produtosAtivos':produtosAtivos,
-                                                            'servicosAtivos':servicosAtivos})
+                                                            'subProdutosAtivos':subProdutosAtivos})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 

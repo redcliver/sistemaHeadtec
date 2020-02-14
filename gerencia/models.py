@@ -26,15 +26,26 @@ class clienteModel(models.Model):
         return self.nome
 
 
-class produtoModel(models.Model):
+class subProdutoModel(models.Model):
     ST = (
         ('1', 'Ativo'),
         ('2', 'Inativo'),
         ('3', 'Excluido'),
     )
-    PS = (
-        ('1', 'Produto'),
-        ('2', 'Serviço'),
+    id = models.AutoField(primary_key=True)
+    estado = models.CharField(max_length=1, choices=ST, default=1)
+    nome = models.CharField(max_length=200)
+    dataCadastro = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.nome
+
+
+class produtoModel(models.Model):
+    ST = (
+        ('1', 'Ativo'),
+        ('2', 'Inativo'),
+        ('3', 'Excluido'),
     )
     UN = (
         ('1', 'N/A'),
@@ -45,8 +56,8 @@ class produtoModel(models.Model):
     )
     id = models.AutoField(primary_key=True)
     estado = models.CharField(max_length=1, choices=ST, default=1)
-    prodserv = models.CharField(max_length=1, choices=PS, default=1)
-    unidade = models.CharField(max_length=1, choices=PS, default=1)
+    subProduto = models.ForeignKey(subProdutoModel, on_delete=models.CASCADE)
+    unidade = models.CharField(max_length=1, choices=UN, default=1)
     nome = models.CharField(max_length=200)
     observacao = models.CharField(max_length=200, null=True, blank=True)
     valor = models.DecimalField(max_digits=10, decimal_places=2, default=0)
@@ -80,11 +91,14 @@ class orcamentoModel(models.Model):
     )
     id = models.AutoField(primary_key=True)
     estado = models.CharField(max_length=1, choices=ES, default=1)
-    pagamento = models.CharField(max_length=1, choices=PG, null=True, blank=True)
+    pagamento = models.CharField(
+        max_length=1, choices=PG, null=True, blank=True)
     produtoItem = models.ManyToManyField(produtoItemModel)
     cliente = models.ForeignKey(clienteModel, on_delete=models.CASCADE)
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    desconto = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    subtotal = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
+    desconto = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     obs = models.CharField(max_length=1000, null=True, blank=True)
     dataFechamento = models.DateTimeField(default=timezone.now)
@@ -105,13 +119,16 @@ class caixaModel(models.Model):
     )
     id = models.AutoField(primary_key=True)
     operacao = models.CharField(max_length=1, choices=OP, default=1)
-    total = models.DecimalField(max_digits=10, decimal_places=2)    
-    pagamento = models.CharField(max_length=1, choices=PG, null=True, blank=True)
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    pagamento = models.CharField(
+        max_length=1, choices=PG, null=True, blank=True)
     referencia = models.CharField(max_length=200, null=True, blank=True)
     descricao = models.CharField(max_length=200, null=True, blank=True)
-    desconto = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    valorOperacao = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    desconto = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
+    valorOperacao = models.DecimalField(
+        max_digits=10, decimal_places=2, null=True, blank=True)
     dataCadastro = models.DateTimeField(default=timezone.now)
-    
+
     def __str__(self):
         return self.str(id)
