@@ -9,22 +9,13 @@
                 <span>Buscar Produto/Serviço</span>
             </div>
             <div class="form-group col-sm-12 col-md-12">
-                <label >Produto</label>
+                <label >Produto/Serviço</label>
                 <select name="produtoID" class="form-control" >
-                    <option disabled selected > -- Produtos -- </option>
+                    <option disabled selected > -- Produtos/Serviços -- </option>
                     {% for produtoModel in produtosAtivos %}
                         <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
                     {% endfor %}
                 </select>    
-            </div>
-            <div class="form-group col-sm-12 col-md-12">
-                <label >Serviço</label>
-                <select name="produtoID" class="form-control" >
-                    <option disabled selected > -- Serviços -- </option>
-                    {% for produtoModel in servicosAtivos %}
-                        <option value={{produtoModel.id}}>{{produtoModel.nome}}</option>
-                    {% endfor %}
-                </select>     
             </div>
             <div class="form-group col-sm-12 col-md-12">
                 <br>

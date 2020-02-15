@@ -385,8 +385,9 @@ def orcamentosNovo(request):
             today = now
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
             clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
-            produtosAtivos = produtoModel.objects.filter(prodserv=1).all().order_by('nome')
-            servicosAtivos = produtoModel.objects.filter(prodserv=2).all().order_by('nome')
+            produtosAtivos = produtoModel.objects.filter(estado=1).all().order_by('nome')
+            subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
+
             try:
                 orcamentoIDPost = request.POST.get('orcamentoID')
                 orcamentoObjPost = orcamentoModel.objects.filter(id=orcamentoIDPost).get()
@@ -406,7 +407,7 @@ def orcamentosNovo(request):
                                                                 'today':today,
                                                                 'clienteObjto':clienteObjto,
                                                             'produtosAtivos':produtosAtivos,
-                                                            'servicosAtivos':servicosAtivos})
+                                                            'subProdutosAtivos':subProdutosAtivos})
 
             if request.method == 'POST' and request.POST.get('clienteID') != None and orcamentoObjPost == None:
                 clienteIDPost = request.POST.get('clienteID')
