@@ -37,6 +37,7 @@
                 placeholder="Nome Completo" disabled>
         </div>
         {% endif %}
+        {% if subProdutosAtivos and not produtosAtivos %}
         <div class="form-group col-sm-8 col-md-4">
             <label>Categoria</label>
             <select name="subProdutoID" class="form-control">
@@ -46,8 +47,23 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="form-group col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-8">
+            <br>
+            <input class="btn btn-outline-success float-left" formaction="/gerencia/orcamentosNovo/" type="submit" value="Buscar" />
         </div>
+        <div class="col-sm-12 col-md-12">
+            <br>
+            <input class="btn btn-outline-success float-right" formaction="/gerencia/orcamentosBaixa/" formmethod="GET" type="submit" value="Finalizar" />
+        </div>
+        {% endif %}
+        {% if produtosAtivos and not subProdutosAtivos %}
+        
+        <div class="form-group col-sm-12 col-md-4">
+            <label>Categoria</label>
+            <input type="text" name="categoria" value="{{subProdutoNome}}" class="form-control" maxlength="300"
+                placeholder="Categoria" disabled>
+        </div>
+        <div class="col-sm-12 col-md-8"></div>
         <div class="form-group col-sm-8 col-md-4">
             <label>Produto/Serviço</label>
             <select name="produtoID" class="form-control">
@@ -59,28 +75,22 @@
         </div>
         <div class="form-group col-sm-4 col-md-1">
             <label>Qnt.</label>
-            <input type="number" name="qntProd" step="0.1" class="form-control" maxlength="5" placeholder="0">
+            <input type="number" name="qntProd" step="0.1" class="form-control" maxlength="5" value="1" placeholder="0">
         </div>
         <div class="form-group col-sm-0 col-md-2">
-        </div>
-        <div class="form-group col-sm-4 col-md-1">
-            <label>Qnt.</label>
-            <input type="number" name="qntServ" step="0.1" class="form-control" maxlength="5" placeholder="0">
         </div>
         <div class="col-sm-12 col-md-12">
             <br>
             <div class="float-right">
-                <input class="btn btn-outline-success " type="submit" value="Adicinar Itens" />&nbsp;&nbsp;&nbsp;
-                {% if orcamentoObj %}
-                <button class="btn btn-outline-success " type="submit" formmethod="GET"
-                    formaction="/gerencia/orcamentosVisualizar">Finalizar</button>
-                {% endif %}
+                <input class="btn btn-outline-success " type="submit" value="Adicinar Itens" />                
             </div>
             <div class="cancelarOrc">
                 <input class="btn btn-outline-secondary float-left" type="submit" value="Cancelar" formmethod="GET"
-                    formaction="/gerencia/orcamentosHome/" />
+                    formaction="/gerencia/orcamentosNovo/" />
             </div>
+
         </div>
+        {% endif %}
         {% if orcamentoObj %}
         <div class="form-group col-sm-12 col-md-12">
             <br>
@@ -88,7 +98,8 @@
                 <thead>
                     <tr class="cabecalhoTable">
                         <th width="5%" scope="col">#</th>
-                        <th width="60%" scope="col">Itens</th>
+                        <th width="20%" scope="col">Categoria</th>
+                        <th width="40%" scope="col">Item</th>
                         <th width="10%" scope="col">Valor Un.</th>
                         <th width="10%" scope="col">Qnt.</th>
                         <th width="10%" scope="col" class="text-right">Valor Total</th>
@@ -100,6 +111,7 @@
                     {% for produtoItemModel in orcamentoObj.produtoItem.all %}
                     <tr>
                         <th scope="row">{{produtoItemModel.produto.id}}</th>
+                        <td>{{produtoItemModel.produto.subProduto}}</td>
                         <td>{{produtoItemModel.produto.nome}}</td>
                         <td>R$ {{produtoItemModel.produto.valor|floatformat:2}}</td>
                         <td>{{produtoItemModel.quantidade}}</td>

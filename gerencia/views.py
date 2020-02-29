@@ -3,6 +3,7 @@ import datetime
 from datetime import timedelta
 from django.utils import timezone
 import decimal
+from decimal import Decimal
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from .models import clienteModel, subProdutoModel, produtoModel, orcamentoModel, produtoItemModel, caixaModel
@@ -212,11 +213,9 @@ def subProdutosNovo(request):
                 nome = request.POST.get('nome')
                 newSubProduto = subProdutoModel(nome=nome)
                 newSubProduto.save()
-                msgConfirmacao = "Categoria cadastrada com sucesso!"
                 return render (request, 'gerencia/produtoServico/produtoNovo.html', {'title':'Novo Produto/Servico', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
-                                                            'msgConfirmacao':msgConfirmacao,
                                                             'subProdutosAtivos':subProdutosAtivos})
             return render (request, 'gerencia/produtoServico/produtoNovo.html', {'title':'Novo Produto/Servico', 
                                                             'msgTelaInicial':msgTelaInicial,
@@ -267,8 +266,7 @@ def produtosBusca(request):
         if request.user.last_name == "GERENCIA":
             now = datetime.datetime.now()
             now = now.hour
-            produtosAtivos = produtoModel.objects.filter(estado=1).all().order_by('nome')
-            subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
+            categorias = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
             if now >= 4 and now <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
@@ -276,20 +274,21 @@ def produtosBusca(request):
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name() 
             elif now >= 18 and now < 4:
                 msgTelaInicial = "Boa Tarde, " + request.user.get_short_name()
-            if request.method == 'POST' and request.POST.get('subProdutoID') != None:
-                subProdutoID = request.POST.get('subProdutoID')
-                subProdutoObj = subProdutoModel.objects.filter(id=subProdutoID).get()
+            if request.method == 'POST' and request.POST.get('categoriaID') != None:
+                categoriaID = request.POST.get('categoriaID')
+                categoriaObj = subProdutoModel.objects.get(id=categoriaID)
+                produtosAtivos = produtoModel.objects.filter(subProduto__id=categoriaObj.id, estado=1).all()
+                subProdutoNome = categoriaObj.nome
 
                 return render (request, 'gerencia/produtoServico/produtoBusca.html', {'title':'Buscar Produto/Serviço', 
                                                                 'msgTelaInicial':msgTelaInicial,
                                                                 'produtosAtivos':produtosAtivos,
-                                                                'subProdutoObj':subProdutoObj})
+                                                                'subProdutoNome':subProdutoNome})
             
                 
             return render (request, 'gerencia/produtoServico/produtoBusca.html', {'title':'Buscar Produto/Serviço', 
                                                             'msgTelaInicial':msgTelaInicial,
-                                                            'produtosAtivos':produtosAtivos,
-                                                            'subProdutosAtivos':subProdutosAtivos})
+                                                            'categorias':categorias})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 
@@ -336,17 +335,26 @@ def produtosEditar(request):
                                                                 'produtoObj':produtoObj})
             if request.method == 'POST' and request.POST.get('produtoID') != None:
                 produtoID = request.POST.get('produtoID')
+                subCategoria = request.POST.get('subCategoria')
                 produtoObj = produtoModel.objects.filter(id=produtoID).get()
+                for c in subProdutoModel.objects.all():
+                    if c.nome == subCategoria:
+                        produtoObj.subProduto = c
+                    else:
+                        novaCategoria = subProdutoModel(nome=subCategoria)
+                        novaCategoria.save()
+                        produtoObj.subProduto = novaCategoria
 
                 nome = request.POST.get('nome')
                 unidade = request.POST.get('unidade')
-                valor = request.POST.get('valor')
+                valor = request.POST.get('novoValor')
                 prodserv = request.POST.get('prodserv')
                 observacao = request.POST.get('observacao')
 
                 produtoObj.nome = nome 
                 produtoObj.unidade = unidade
-                produtoObj.valor = decimal.Decimal(valor)
+                if valor != None and valor != "":
+                    produtoObj.valor = decimal.Decimal(valor)
                 produtoObj.prodserv = prodserv
                 produtoObj.observacao = observacao
                 produtoObj.save()
@@ -406,42 +414,66 @@ def orcamentosNovo(request):
                                                                 'msgTelaInicial':msgTelaInicial,
                                                                 'today':today,
                                                                 'clienteObjto':clienteObjto,
-                                                            'produtosAtivos':produtosAtivos,
-                                                            'subProdutosAtivos':subProdutosAtivos})
+                                                                'subProdutosAtivos':subProdutosAtivos})
 
-            if request.method == 'POST' and request.POST.get('clienteID') != None and orcamentoObjPost == None:
+            if request.method == 'POST' and request.POST.get('clienteID') != None and request.POST.get('orcamentoID') == None and request.POST.get('subProdutoID') != None:
+                clienteIDPost = request.POST.get('clienteID')
+                subProdutoIDPost = request.POST.get('subProdutoID')
+                clienteObjto1 = clienteModel.objects.filter(id=clienteIDPost).get()
+                subProdutoObj1 = subProdutoModel.objects.filter(id=subProdutoIDPost).get()
+                produtosAtivos = produtoModel.objects.filter(subProduto__id=subProdutoIDPost, estado=1).all().order_by('nome')
+
+                return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today,
+                                                            'clienteObjto':clienteObjto1,
+                                                            'subProdutoNome':subProdutoObj1.nome,
+                                                            'produtosAtivos':produtosAtivos})
+            #IGOR
+            if request.method == 'POST' and request.POST.get('clienteID') != None and request.POST.get('orcamentoID') == None and request.POST.get('produtoID') != None:
                 clienteIDPost = request.POST.get('clienteID')
                 clienteObj = clienteModel.objects.filter(id=clienteIDPost).get()
                 orcamentoObjNew = orcamentoModel(cliente=clienteObj)
                 orcamentoObjNew.save()
-                if request.POST.get('produtoID') != None and request.POST.get('produtoID') != "None": 
-                    produtoIDPost = request.POST.get('produtoID')
-                    qntProd = request.POST.get('qntProd')
-                    prodObj = produtoModel.objects.filter(id=produtoIDPost).get()
-                    prodVlrTotal = decimal.Decimal(prodObj.valor) * int(qntProd)
-                    prodItemObj = produtoItemModel(produto=prodObj, quantidade=qntProd, total=prodVlrTotal)
-                    prodItemObj.save()
-                    orcamentoObjNew.produtoItem.add(prodItemObj)
-                    orcamentoObjNew.total = decimal.Decimal(orcamentoObjNew.total) + decimal.Decimal(prodItemObj.total) 
-                    orcamentoObjNew.subtotal = orcamentoObjNew.total
-                if request.POST.get('servicoID') != None and request.POST.get('servicoID') != "None":
-                    servicoIDPost = request.POST.get('servicoID')
-                    qntServ = request.POST.get('qntServ')
-                    servObj = produtoModel.objects.filter(id=servicoIDPost).get()
-                    serVlrTotal = decimal.Decimal(servObj.valor) * int(qntServ)
-                    servItemObj = produtoItemModel(produto=servObj, quantidade=qntServ, total=serVlrTotal)
-                    servItemObj.save()
-                    orcamentoObjNew.produtoItem.add(servItemObj)
-                    orcamentoObjNew.total = decimal.Decimal(orcamentoObjNew.total) + decimal.Decimal(servItemObj.total) 
-                    orcamentoObjNew.subtotal = orcamentoObjNew.total
+                produtoIDPost = request.POST.get('produtoID')
+                qntProd = request.POST.get('qntProd')
+                prodObj = produtoModel.objects.filter(id=produtoIDPost).get()
+                prodVlrTotal = decimal.Decimal(prodObj.valor) * int(qntProd)
+                prodItemObj = produtoItemModel(produto=prodObj, quantidade=qntProd, total=prodVlrTotal)
+                prodItemObj.save()
+                orcamentoObjNew.produtoItem.add(prodItemObj)
+                orcamentoObjNew.total = decimal.Decimal(orcamentoObjNew.total) + decimal.Decimal(prodItemObj.total) 
+                orcamentoObjNew.subtotal = orcamentoObjNew.total
                 orcamentoObjNew.save()
+                subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
                                                             'orcamentoObj':orcamentoObjNew,
-                                                            'produtosAtivos':produtosAtivos,
-                                                            'servicosAtivos':servicosAtivos})
-            if request.method == 'POST' and orcamentoObjPost != None:
+                                                            'subProdutosAtivos':subProdutosAtivos})
+            if request.method == 'POST' and request.POST.get('orcamentoID') != None and request.POST.get('produtoID') == None and request.POST.get('subProdutoID') != None:
+                orcamentoIDPost = request.POST.get('orcamentoID')
+                orcamentoObjPost = orcamentoModel.objects.filter(id=orcamentoIDPost).get()
+                subProdutoIDPost = request.POST.get('subProdutoID')
+                subProdutoObj1 = subProdutoModel.objects.filter(id=subProdutoIDPost).get()
+                produtosAtivos = produtoModel.objects.filter(subProduto__id=subProdutoIDPost, estado=1).all().order_by('nome')
+                return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today,
+                                                            'orcamentoObj':orcamentoObjPost,
+                                                            'subProdutoNome':subProdutoObj1.nome,
+                                                            'produtosAtivos':produtosAtivos})
+            if request.method == 'POST' and request.POST.get('orcamentoID') != None and request.POST.get('clienteID') == None and request.POST.get('subProdutoID') == None and request.POST.get('produtoID') == None:
+                orcamentoIDPost = request.POST.get('orcamentoID')
+                orcamentoObjPost = orcamentoModel.objects.filter(id=orcamentoIDPost).get()                
+                subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
+
+                return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
+                                                            'msgTelaInicial':msgTelaInicial,
+                                                            'today':today,
+                                                            'orcamentoObj':orcamentoObjPost,
+                                                            'subProdutosAtivos':subProdutosAtivos})
+            if request.method == 'POST' and request.POST.get('orcamentoID') != None and request.POST.get('subProdutoID') == None and request.POST.get('produtoID') != None:
                 if request.POST.get('produtoID') != None and request.POST.get('produtoID') != "None": 
                     produtoIDPost = request.POST.get('produtoID')
                     qntProd = request.POST.get('qntProd')
@@ -452,23 +484,14 @@ def orcamentosNovo(request):
                     orcamentoObjPost.produtoItem.add(prodItemObj)
                     orcamentoObjPost.total = orcamentoObjPost.total + prodItemObj.total 
                     orcamentoObjPost.subtotal = orcamentoObjPost.total
-                if request.POST.get('servicoID') != None and request.POST.get('servicoID') != "None":
-                    servicoIDPost = request.POST.get('servicoID')
-                    qntServ = request.POST.get('qntServ')
-                    servObj = produtoModel.objects.filter(id=servicoIDPost).get()
-                    serVlrTotal = decimal.Decimal(servObj.valor) * int(qntServ)
-                    servItemObj = produtoItemModel(produto=servObj, quantidade=qntServ, total=serVlrTotal)
-                    servItemObj.save()
-                    orcamentoObjPost.produtoItem.add(servItemObj)
-                    orcamentoObjPost.total = orcamentoObjPost.total + servItemObj.total 
-                    orcamentoObjPost.subtotal = orcamentoObjPost.total
                 orcamentoObjPost.save()
+                
+                subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
                                                             'orcamentoObj':orcamentoObjPost,
-                                                            'produtosAtivos':produtosAtivos,
-                                                            'servicosAtivos':servicosAtivos})
+                                                            'subProdutosAtivos':subProdutosAtivos})
             return render (request, 'gerencia/orcamento/orcamentoNovo.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
@@ -483,8 +506,6 @@ def orcamentosBaixa(request):
             now = datetime.datetime.now()
             now = now.hour
             clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
-            produtosAtivos = produtoModel.objects.filter(estado=1, prodserv=1).all().order_by('nome')
-            servicosAtivos = produtoModel.objects.filter(estado=1, prodserv=2).all().order_by('nome')
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
             if now >= 4 and now <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
@@ -507,9 +528,7 @@ def orcamentosBaixa(request):
                 
             return render (request, 'gerencia/orcamento/orcamentosBaixa.html', {'title':'Baixa Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
-                                                            'clientesAtivos':clientesAtivos,
-                                                            'produtosAtivos':produtosAtivos,
-                                                            'servicosAtivos':servicosAtivos})
+                                                            'clientesAtivos':clientesAtivos})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 
@@ -567,8 +586,6 @@ def orcamentosBusca(request):
             now = datetime.datetime.now()
             hora = now.hour
             clientesAtivos = clienteModel.objects.filter(estado=1).all().order_by('nome')
-            produtosAtivos = produtoModel.objects.filter(estado=1, prodserv=1).all().order_by('nome')
-            servicosAtivos = produtoModel.objects.filter(estado=1, prodserv=2).all().order_by('nome')
             msgTelaInicial = "Olá, " + request.user.get_short_name() 
             if hora >= 4 and hora <= 11:
                 msgTelaInicial = "Bom dia, " + request.user.get_short_name() 
@@ -591,9 +608,7 @@ def orcamentosBusca(request):
                 
             return render (request, 'gerencia/orcamento/orcamentoBusca.html', {'title':'Buscar Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
-                                                            'clientesAtivos':clientesAtivos,
-                                                            'produtosAtivos':produtosAtivos,
-                                                            'servicosAtivos':servicosAtivos})
+                                                            'clientesAtivos':clientesAtivos})
         return render (request, 'site/login.html', {'title':'Login'})
     return render (request, 'site/login.html', {'title':'Login'})
 

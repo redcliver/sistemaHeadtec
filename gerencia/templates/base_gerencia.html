@@ -606,7 +606,7 @@
     }
     function mValor(valor) {
       valor = valor.replace(/\D/g, "")
-      valor = valor.replace(/(\d)(\d{2})$/, "$1.$2")
+      valor = valor.replace(/(\d)(\d{2})$/, "$1,$2")
       return valor
     }
     function limpa_formulário_cep() {

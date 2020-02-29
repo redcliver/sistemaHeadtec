@@ -97,8 +97,7 @@ class orcamentoModel(models.Model):
     cliente = models.ForeignKey(clienteModel, on_delete=models.CASCADE)
     subtotal = models.DecimalField(
         max_digits=10, decimal_places=2, null=True, blank=True)
-    desconto = models.DecimalField(
-        max_digits=10, decimal_places=2, null=True, blank=True)
+    desconto = models.DecimalField(default=0, max_digits=10, decimal_places=2, null=True, blank=True)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     obs = models.CharField(max_length=1000, null=True, blank=True)
     dataFechamento = models.DateTimeField(default=timezone.now)

@@ -14,8 +14,15 @@
     {% csrf_token %}
     <input type="hidden" name="produtoID" value="{{produtoObj.id}}">
     <div class="form-row">
-        <div class="col-sm-12 col-md-12">
+        <div class="col-sm-12 col-md-3">
             <br>
+            <label>Categoria</label>
+            <input type="text" name="subCategoria" class="form-control" maxlength="200" placeholder="Categoria"
+                value="{{produtoObj.subProduto.nome}}" required>
+        </div>
+        <div class="col-sm-12 col-md-12">
+        </div>
+        <div class="col-sm-12 col-md-12">
             <label>Nome</label>
             <input type="text" name="nome" class="form-control" maxlength="200" placeholder="Nome"
                 value="{{produtoObj.nome}}" required autofocus>
@@ -81,9 +88,14 @@
         </div>
         {% endif %}
         <div class="col-sm-12 col-md-3">
-            <label>Valor</label>
-            <input type="text" class="form-control" name="valor" value="{{produtoObj.valor|floatformat:2}}" step="0.01"
-                maxlength="10" onkeydown="javascript: fMasc( this, mValor );">
+            <label>Valor Atual</label>
+            <input type="text" class="form-control" name="valorAtual" value="R$ {{produtoObj.valor}}"
+                maxlength="15" disabled>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <label>Novo Valor</label>
+            <input type="number" class="form-control" name="novoValor" step="0.01"
+                maxlength="10" >
         </div>
         {% if produtoObj.prodserv == '1' %}
         <div class="col-sm-12 col-md-3">
