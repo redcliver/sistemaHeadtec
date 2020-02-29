@@ -486,12 +486,10 @@ def orcamentosNovo(request):
                     orcamentoObjPost.subtotal = orcamentoObjPost.total
                 orcamentoObjPost.save()
                 
-                subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
-                                                            'orcamentoObj':orcamentoObjPost,
-                                                            'subProdutosAtivos':subProdutosAtivos})
+                                                            'orcamentoObj':orcamentoObjPost})
             return render (request, 'gerencia/orcamento/orcamentoNovo.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
@@ -700,14 +698,12 @@ def orcamentosExcluirItem(request):
                 orcamentoObj.total = orcamentoObj.total - decimal.Decimal(prodItemObj.total) 
                 orcamentoObj.subtotal = orcamentoObj.total
                 orcamentoObj.save()
-                produtosAtivos = produtoModel.objects.filter(prodserv=1).all().order_by('nome')
-                servicosAtivos = produtoModel.objects.filter(prodserv=2).all().order_by('nome')
+                subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo/Editar Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
                                                             'orcamentoObj':orcamentoObj,
-                                                            'produtosAtivos':produtosAtivos,
-                                                            'servicosAtivos':servicosAtivos})
+                                                            'subProdutosAtivos':subProdutosAtivos})
             
             return render (request, 'gerencia/orcamento/orcamentoVisualizar.html', {'title':'Visualizar Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial})
