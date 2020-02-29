@@ -486,10 +486,12 @@ def orcamentosNovo(request):
                     orcamentoObjPost.subtotal = orcamentoObjPost.total
                 orcamentoObjPost.save()
                 
+                subProdutosAtivos = subProdutoModel.objects.filter(estado=1).all().order_by('nome')
                 return render (request, 'gerencia/orcamento/orcamentoNovo1.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
-                                                            'orcamentoObj':orcamentoObjPost})
+                                                            'orcamentoObj':orcamentoObjPost,
+                                                            'subProdutosAtivos':subProdutosAtivos})
             return render (request, 'gerencia/orcamento/orcamentoNovo.html', {'title':'Novo Orçamento', 
                                                             'msgTelaInicial':msgTelaInicial,
                                                             'today':today,
